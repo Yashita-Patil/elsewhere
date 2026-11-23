@@ -11,6 +11,8 @@ const destinationSchema = new mongoose.Schema(
     image: { type: String, required: true }, // e.g. /images/bali-coast.jpg
     days: { type: Number, required: true, min: 1 },
     from: { type: Number, required: true, min: 0 }, // starting price per person (USD)
+    rating: { type: Number, default: 5, min: 0, max: 5 },
+    numReviews: { type: Number, default: 0, min: 0 },
     highlights: [{ type: String }],
     category: { type: String, required: true, trim: true },
   },

@@ -2,8 +2,10 @@ import { useEffect } from "react";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { ModalProvider } from "./context/ModalContext";
+import { CurrencyProvider } from "./context/CurrencyContext";
 import Home from "./pages/Home";
 import DestinationDetail from "./pages/DestinationDetail";
+import PackageDetail from "./pages/PackageDetail";
 import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 import LoginDialog from "./components/LoginDialog";
@@ -27,18 +29,21 @@ export default function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <ModalProvider>
-          <ScrollToHash />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/destinations/:slug" element={<DestinationDetail />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          {/* These two popups are available on every page */}
-          <LoginDialog />
-          <DashboardDialog />
-        </ModalProvider>
+        <CurrencyProvider>
+          <ModalProvider>
+            <ScrollToHash />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/destinations/:slug" element={<DestinationDetail />} />
+              <Route path="/packages/:id" element={<PackageDetail />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+            {/* These two popups are available on every page */}
+            <LoginDialog />
+            <DashboardDialog />
+          </ModalProvider>
+        </CurrencyProvider>
       </AuthProvider>
     </BrowserRouter>
   );

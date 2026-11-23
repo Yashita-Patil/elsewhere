@@ -59,6 +59,20 @@ export async function getPackages(req, res) {
   res.json(packages);
 }
 
+// GET /api/packages/:id
+export async function getPackageById(req, res) {
+  try {
+    const item = await Package.findById(req.params.id).populate("destination");
+    if (!item) return res.status(404).json({ message: "Package not found" });
+    res.json(item);
+  } catch (err) {
+    if (err.name === "CastError") {
+      return res.status(404).json({ message: "Package not found" });
+    }
+    res.status(500).json({ message: err.message });
+  }
+}
+
 // ----- Admin only -----
 
 // POST /api/packages

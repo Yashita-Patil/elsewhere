@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import Button from "./ui/Button";
+import CurrencySelector from "./CurrencySelector";
 import { useAuth } from "../context/AuthContext";
 import { useModals } from "../context/ModalContext";
 
@@ -27,19 +28,28 @@ export default function Header({ onPlan }) {
 
       <nav className="desktop-nav" aria-label="Main navigation">
         {navLinks.map((link) => (
-          <a key={link.href} href={link.href}>{link.label}</a>
+          <a key={link.href} href={link.href}>
+            {link.label}
+          </a>
         ))}
       </nav>
 
       <div className="header-actions">
+        {/* Currency Switcher */}
+        <CurrencySelector />
+
         {user?.role === "admin" ? (
-          <Link to="/admin" className="header-login header-admin">Admin Dashboard</Link>
+          <Link to="/admin" className="header-login header-admin">
+            Admin Dashboard
+          </Link>
         ) : user ? (
           <Button variant="ghost" className="header-login" onClick={openDashboard}>
             <span className="user-initial">{user.name.charAt(0).toUpperCase()}</span> My trips
           </Button>
         ) : (
-          <Button variant="ghost" className="header-login" onClick={openLogin}>Log in</Button>
+          <Button variant="ghost" className="header-login" onClick={openLogin}>
+            Log in
+          </Button>
         )}
         <Button className="header-plan" onClick={onPlan}>
           Plan your trip <ArrowUpRight aria-hidden="true" />
@@ -57,13 +67,26 @@ export default function Header({ onPlan }) {
 
       {mobileMenuOpen && (
         <nav className="mobile-nav" aria-label="Mobile navigation">
+          <div className="mobile-nav-currency">
+            <span className="mobile-currency-label">Currency:</span>
+            <CurrencySelector />
+          </div>
           {navLinks.map((link) => (
-            <a key={link.href} href={link.href} onClick={() => setMobileMenuOpen(false)}>{link.label}</a>
+            <a key={link.href} href={link.href} onClick={() => setMobileMenuOpen(false)}>
+              {link.label}
+            </a>
           ))}
           {user?.role === "admin" ? (
-            <Link to="/admin" onClick={() => setMobileMenuOpen(false)}>Admin Dashboard</Link>
+            <Link to="/admin" onClick={() => setMobileMenuOpen(false)}>
+              Admin Dashboard
+            </Link>
           ) : (
-            <button onClick={() => { setMobileMenuOpen(false); openAccount(); }}>
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                openAccount();
+              }}
+            >
               {user ? "My trips" : "Log in"}
             </button>
           )}

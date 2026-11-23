@@ -7,7 +7,8 @@ import PackageForm from "../components/admin/PackageForm";
 import { api } from "../api";
 import { useAuth } from "../context/AuthContext";
 import { useModals } from "../context/ModalContext";
-import { formatDate, formatPrice } from "../utils/format";
+import { useCurrency } from "../context/CurrencyContext";
+import { formatDate } from "../utils/format";
 import usePageTitle from "../utils/usePageTitle";
 
 // Admin panel: manage destinations and journeys, and see every booking.
@@ -16,6 +17,7 @@ export default function Admin() {
   usePageTitle("Admin — Elsewhere");
   const { user, loading, logout } = useAuth();
   const { openLogin } = useModals();
+  const { formatPrice } = useCurrency();
 
   const [tab, setTab] = useState("destinations");
   const [destinations, setDestinations] = useState([]);
