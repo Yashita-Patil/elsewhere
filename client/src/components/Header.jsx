@@ -32,10 +32,9 @@ export default function Header({ onPlan }) {
       </nav>
 
       <div className="header-actions">
-        {user?.role === "admin" && (
-          <Link to="/admin" className="header-login header-admin">Admin</Link>
-        )}
-        {user ? (
+        {user?.role === "admin" ? (
+          <Link to="/admin" className="header-login header-admin">Admin Dashboard</Link>
+        ) : user ? (
           <Button variant="ghost" className="header-login" onClick={openDashboard}>
             <span className="user-initial">{user.name.charAt(0).toUpperCase()}</span> My trips
           </Button>
@@ -61,10 +60,13 @@ export default function Header({ onPlan }) {
           {navLinks.map((link) => (
             <a key={link.href} href={link.href} onClick={() => setMobileMenuOpen(false)}>{link.label}</a>
           ))}
-          {user?.role === "admin" && <Link to="/admin">Admin</Link>}
-          <button onClick={() => { setMobileMenuOpen(false); openAccount(); }}>
-            {user ? "My trips" : "Log in"}
-          </button>
+          {user?.role === "admin" ? (
+            <Link to="/admin" onClick={() => setMobileMenuOpen(false)}>Admin Dashboard</Link>
+          ) : (
+            <button onClick={() => { setMobileMenuOpen(false); openAccount(); }}>
+              {user ? "My trips" : "Log in"}
+            </button>
+          )}
         </nav>
       )}
     </header>

@@ -63,11 +63,21 @@ export default function Admin() {
   if (!isAdmin) {
     return (
       <div className="page-message">
-        <div style={{ textAlign: "center" }}>
-          <p>This page is for admins only.</p>
-          <Button onClick={user ? () => window.history.back() : openLogin}>{user ? "Go back" : "Log in"}</Button>
-          {" "}
-          <Button asChild variant="outline"><Link to="/">Home</Link></Button>
+        <div style={{ textAlign: "center", maxWidth: "420px", margin: "0 auto" }}>
+          <h2 style={{ marginBottom: "0.5rem" }}>Admin access required</h2>
+          <p style={{ color: "var(--muted)", marginBottom: "1.5rem" }}>
+            {user
+              ? `You are currently signed in as ${user.email}, which does not have administrator privileges.`
+              : "Please sign in with your administrator account to access the control panel."}
+          </p>
+          <div style={{ display: "flex", gap: "0.75rem", justifyContent: "center" }}>
+            {user ? (
+              <Button onClick={() => { logout(); openLogin(); }}>Sign in as Admin</Button>
+            ) : (
+              <Button onClick={openLogin}>Log in as Admin</Button>
+            )}
+            <Button asChild variant="outline"><Link to="/">Go to Home</Link></Button>
+          </div>
         </div>
       </div>
     );

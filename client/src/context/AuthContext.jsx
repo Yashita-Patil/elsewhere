@@ -24,6 +24,7 @@ export function AuthProvider({ children }) {
   const handleAuthSuccess = (data) => {
     setToken(data.token);
     setUser(data.user);
+    return data.user;
   };
 
   const login = async (email, password) => handleAuthSuccess(await api.post("/auth/login", { email, password }));

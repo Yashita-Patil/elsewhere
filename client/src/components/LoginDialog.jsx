@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "./ui/Dialog";
 import Button from "./ui/Button";
@@ -8,6 +9,7 @@ import { useModals } from "../context/ModalContext";
 
 // One popup for both "Log in" and "Create account"
 export default function LoginDialog() {
+  const navigate = useNavigate();
   const { login, register } = useAuth();
   const { loginOpen, setLoginOpen, setDashboardOpen } = useModals();
 
@@ -25,11 +27,17 @@ export default function LoginDialog() {
     setBusy(true);
     setError("");
     try {
-      if (isRegister) await register(name.trim(), email.trim(), password);
-      else await login(email.trim(), password);
+      const loggedUser = isRegister
+        ? await register(name.trim(), email.trim(), password)
+        : await login(email.trim(), password);
       setPassword("");
       setLoginOpen(false);
-      setDashboardOpen(true);
+      setDashboardOpen(false);
+      if (loggedUser?.role === "admin") {
+        navigate("/admin");
+      } else {
+        setDashboardOpen(true);
+      }
     } catch (err) {
       setError(err.message);
     } finally {

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { X } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ArrowUpRight, X } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "./ui/Dialog";
 import Button from "./ui/Button";
 import { api } from "../api";
@@ -60,6 +61,15 @@ export default function DashboardDialog() {
           <DialogTitle>Hello, {user.name.split(" ")[0]}.</DialogTitle>
           <DialogDescription>{user.email}</DialogDescription>
         </DialogHeader>
+
+        {user?.role === "admin" && (
+          <div style={{ margin: "0.75rem 0", padding: "0.75rem 1rem", background: "rgba(0,0,0,0.04)", borderRadius: "8px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <span style={{ fontSize: "0.9rem" }}>Signed in with <strong>Administrator</strong> privileges</span>
+            <Button asChild onClick={() => setDashboardOpen(false)}>
+              <Link to="/admin">Go to Admin Panel <ArrowUpRight aria-hidden="true" /></Link>
+            </Button>
+          </div>
+        )}
 
         <div className="dashboard-content">
           {error && <p className="form-error" role="alert">{error}</p>}
