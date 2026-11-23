@@ -8,7 +8,7 @@ export async function protect(req, res, next) {
     const token = header.startsWith("Bearer ") ? header.slice(7) : null;
     if (!token) return res.status(401).json({ message: "Please log in to continue" });
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || "elsewhere_secret_key_default");
     const user = await User.findById(decoded.id);
     if (!user) return res.status(401).json({ message: "This account no longer exists" });
 

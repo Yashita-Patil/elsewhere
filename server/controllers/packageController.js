@@ -1,4 +1,5 @@
 import Package from "../models/Package.js";
+import Destination from "../models/Destination.js";
 
 const escapeRegex = (text) => text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
@@ -15,8 +16,8 @@ export async function getPackages(req, res) {
   const filter = {};
 
   if (category && category !== "All journeys") filter.category = category;
-  if (maxPrice) filter.price = { $lte: Number(maxPrice) };
-  if (maxDays) filter.duration = { $lte: Number(maxDays) };
+  if (maxPrice && !isNaN(Number(maxPrice))) filter.price = { $lte: Number(maxPrice) };
+  if (maxDays && !isNaN(Number(maxDays))) filter.duration = { $lte: Number(maxDays) };
 
   // "search" = the journeys search box, "place" = the destination search at the top of the page.
   // Both must match when both are used.
@@ -26,8 +27,30 @@ export async function getPackages(req, res) {
     conditions.push({ $or: [{ title: regex }, { location: regex }, { category: regex }] });
   }
   if (place?.trim()) {
-    const regex = new RegExp(escapeRegex(place.trim()), "i");
-    conditions.push({ $or: [{ title: regex }, { location: regex }] });
+    const cleanPlace = place.trim();
+    const regex = new RegExp(escapeRegex(cleanPlace), "i");
+    const words = cleanPlace.split(/\s+/).filter((w) => !/^(the|a|an|in|at|of)$/i.test(w));
+    const wordRegexes = words.map((w) => new RegExp(escapeRegex(w), "i"));
+
+    const matchingDestinations = await Destination.find({
+      $or: [
+        { name: regex },
+        { country: regex },
+        { region: regex },
+        ...wordRegexes.map((wr) => ({ name: wr })),
+        ...wordRegexes.map((wr) => ({ country: wr })),
+      ],
+    }).select("_id");
+    const destIds = matchingDestinations.map((d) => d._id);
+
+    conditions.push({
+      $or: [
+        { title: regex },
+        { location: regex },
+        ...wordRegexes.map((wr) => ({ location: wr })),
+        ...(destIds.length ? [{ destination: { $in: destIds } }] : []),
+      ],
+    });
   }
   if (conditions.length) filter.$and = conditions;
 

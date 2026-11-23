@@ -1,10 +1,14 @@
-import "dotenv/config"; // loads the variables from .env
+import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+dotenv.config({ path: path.join(__dirname, ".env") });
+dotenv.config();
 
 import connectDB from "./config/db.js";
 import { notFound, errorHandler } from "./middleware/errorHandler.js";
@@ -15,7 +19,6 @@ import bookingRoutes from "./routes/bookingRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 
 const app = express();
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // ----- Middleware -----
 app.use(helmet({ contentSecurityPolicy: false })); // safer HTTP headers

@@ -2,7 +2,9 @@ import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 
 const createToken = (id) =>
-  jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN || "7d" });
+  jwt.sign({ id }, process.env.JWT_SECRET || "elsewhere_secret_key_default", {
+    expiresIn: process.env.JWT_EXPIRES_IN || "7d",
+  });
 
 // What we send back about a user (never the password)
 const userResponse = (user) => ({

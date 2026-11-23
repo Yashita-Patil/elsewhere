@@ -1,6 +1,13 @@
 // Run with:  npm run seed
 // WARNING: this DELETES everything in the database and loads fresh sample data.
-import "dotenv/config";
+import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+dotenv.config({ path: path.join(__dirname, "../.env") });
+dotenv.config();
+
 import mongoose from "mongoose";
 import connectDB from "../config/db.js";
 import User from "../models/User.js";
