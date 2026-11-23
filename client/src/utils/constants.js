@@ -29,4 +29,11 @@ export const imageOptions = [
   "/images/canada-rockies.jpg",
   "/images/serengeti.jpg",
   "/images/kyoto.jpg",
+  "/images/goa.jpg",
+  "/images/jaipur.jpg",
+  "/images/manali.jpg",
+  "/images/kerala.jpg",
+  "/images/udaipur.jpg",
+  "/images/varanasi.jpg",
+  "/images/darjeeling.jpg",
 ];

@@ -36,7 +36,7 @@ export default function LoginDialog() {
       if (loggedUser?.role === "admin") {
         navigate("/admin");
       } else {
-        setDashboardOpen(true);
+        navigate("/account");
       }
     } catch (err) {
       setError(err.message);

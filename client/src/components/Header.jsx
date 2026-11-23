@@ -35,8 +35,15 @@ export default function Header({ onPlan }) {
         {user?.role === "admin" ? (
           <Link to="/admin" className="header-login header-admin">Admin Dashboard</Link>
         ) : user ? (
-          <Button variant="ghost" className="header-login" onClick={openDashboard}>
-            <span className="user-initial">{user.name.charAt(0).toUpperCase()}</span> My trips
+          <Button asChild variant="ghost" className="header-login">
+            <Link to="/account">
+              {user.avatar ? (
+                <img src={user.avatar} alt="" className="header-avatar" />
+              ) : (
+                <span className="user-initial">{user.name.charAt(0).toUpperCase()}</span>
+              )}
+              {" "}My Account
+            </Link>
           </Button>
         ) : (
           <Button variant="ghost" className="header-login" onClick={openLogin}>Log in</Button>
@@ -62,9 +69,11 @@ export default function Header({ onPlan }) {
           ))}
           {user?.role === "admin" ? (
             <Link to="/admin" onClick={() => setMobileMenuOpen(false)}>Admin Dashboard</Link>
+          ) : user ? (
+            <Link to="/account" onClick={() => setMobileMenuOpen(false)}>My Account</Link>
           ) : (
-            <button onClick={() => { setMobileMenuOpen(false); openAccount(); }}>
-              {user ? "My trips" : "Log in"}
+            <button onClick={() => { setMobileMenuOpen(false); openLogin(); }}>
+              Log in
             </button>
           )}
         </nav>

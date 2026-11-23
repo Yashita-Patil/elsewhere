@@ -10,7 +10,7 @@ export default function DestinationCard({ destination, index, total, saved, onTo
     <article className={`destination-card destination-card-${index + 1}`}>
       <div className="destination-photo">
         <img src={destination.image} alt={`${destination.name}, ${destination.country}`} loading="lazy" width={1280} height={960} />
-        <span className="photo-index">0{index + 1} / 0{total}</span>
+        <span className="photo-index">{String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}</span>
         <Button
           variant="ghost"
           size="icon"

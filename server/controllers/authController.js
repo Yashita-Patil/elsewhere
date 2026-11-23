@@ -7,12 +7,20 @@ const createToken = (id) =>
   });
 
 // What we send back about a user (never the password)
-const userResponse = (user) => ({
+export const userResponse = (user) => ({
   id: user._id,
   name: user.name,
   email: user.email,
   role: user.role,
-  savedPlaces: user.savedPlaces.map(String),
+  savedPlaces: (user.savedPlaces || []).map((p) => (p?._id ? String(p._id) : String(p))),
+  avatar: user.avatar || "",
+  phone: user.phone || "",
+  dob: user.dob || "",
+  gender: user.gender || "",
+  city: user.city || "",
+  country: user.country || "",
+  bio: user.bio || "",
+  createdAt: user.createdAt,
 });
 
 // POST /api/auth/register

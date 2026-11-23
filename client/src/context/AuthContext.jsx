@@ -37,13 +37,52 @@ export function AuthProvider({ children }) {
     setUser(null);
   };
 
+  // Update profile details
+  const updateProfile = async (profileData) => {
+    const data = await api.put("/users/profile", profileData);
+    setUser(data.user);
+    return data;
+  };
+
+  // Change password
+  const updatePassword = async (currentPassword, newPassword) => {
+    return await api.put("/users/password", { currentPassword, newPassword });
+  };
+
+  // Delete account
+  const deleteAccount = async () => {
+    const res = await api.delete("/users/account");
+    clearToken();
+    setUser(null);
+    return res;
+  };
+
   // Heart button: add or remove a saved destination (needs login)
   const toggleSaved = async (destinationId) => {
     const data = await api.put(`/users/saved/${destinationId}`);
     setUser((current) => ({ ...current, savedPlaces: data.savedPlaces }));
+    return data;
   };
 
-  const value = { user, loading, login, register, logout, toggleSaved };
+  // Explicit remove from saved destinations
+  const removeSaved = async (destinationId) => {
+    const data = await api.delete(`/users/saved/${destinationId}`);
+    setUser((current) => ({ ...current, savedPlaces: data.savedPlaces }));
+    return data;
+  };
+
+  const value = {
+    user,
+    loading,
+    login,
+    register,
+    logout,
+    updateProfile,
+    updatePassword,
+    deleteAccount,
+    toggleSaved,
+    removeSaved,
+  };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 

@@ -5,6 +5,7 @@ import { ModalProvider } from "./context/ModalContext";
 import Home from "./pages/Home";
 import DestinationDetail from "./pages/DestinationDetail";
 import Admin from "./pages/Admin";
+import Account from "./pages/Account";
 import NotFound from "./pages/NotFound";
 import LoginDialog from "./components/LoginDialog";
 import DashboardDialog from "./components/DashboardDialog";
@@ -33,6 +34,7 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/destinations/:slug" element={<DestinationDetail />} />
             <Route path="/admin" element={<Admin />} />
+            <Route path="/account" element={<Account />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           {/* These two popups are available on every page */}

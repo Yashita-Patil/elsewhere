@@ -17,6 +17,13 @@ const userSchema = new mongoose.Schema(
     role: { type: String, enum: ["user", "admin"], default: "user" },
     // Destinations the user has saved (the heart button)
     savedPlaces: [{ type: mongoose.Schema.Types.ObjectId, ref: "Destination" }],
+    avatar: { type: String, default: "" },
+    phone: { type: String, default: "" },
+    dob: { type: String, default: "" },
+    gender: { type: String, default: "" },
+    city: { type: String, default: "" },
+    country: { type: String, default: "" },
+    bio: { type: String, default: "", maxlength: 600 },
   },
   { timestamps: true },
 );
