@@ -11,17 +11,37 @@ const bookingSchema = new mongoose.Schema(
     travelDate: { type: Date, required: true },
     travelers: { type: Number, required: true, min: 1, max: 6 },
     totalPrice: { type: Number, required: true },
-    status: { type: String, enum: ["Upcoming", "Completed", "Cancelled"], default: "Upcoming" },
-    hotel: { type: String, default: "Boutique Heritage Resort & Spa" },
-    transport: { type: String, default: "Private chauffeured transfers & local scenic transfers" },
-    meals: { type: String, default: "Daily artisan breakfast & signature culinary tasting" },
-    activities: [{ type: String }],
-    inclusions: [{ type: String }],
-    review: {
-      rating: { type: Number, min: 1, max: 5 },
-      comment: { type: String },
-      createdAt: { type: Date },
-    },
+
+status: {
+  type: String,
+  enum: ["Upcoming", "Confirmed", "Completed", "Cancelled"],
+  default: "Upcoming",
+},
+paymentStatus: {
+  type: String,
+  enum: ["Paid", "Unpaid", "Refunded"],
+  default: "Paid",
+},
+hotel: {
+  type: String,
+  default: "Boutique Heritage Resort & Spa",
+},
+transport: {
+  type: String,
+  default: "Private chauffeured transfers & local scenic transfers",
+},
+meals: {
+  type: String,
+  default: "Daily artisan breakfast & signature culinary tasting",
+},
+activities: [{ type: String }],
+inclusions: [{ type: String }],
+review: {
+  rating: { type: Number, min: 1, max: 5 },
+  comment: { type: String },
+  createdAt: { type: Date },
+},
+
   },
   { timestamps: true },
 );

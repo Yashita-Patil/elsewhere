@@ -21,6 +21,8 @@ create an account, and send booking enquiries. An admin can manage all content f
 
 **For the admin**
 - Admin panel at `/admin` (only visible to users with the `admin` role)
+- **Executive Analytics Dashboard** (`/admin/analytics`): live KPI cards for Total Bookings, Net Realized Revenue, Active Pipeline, Average Order Value, status breakdown distribution, and custom SVG bar charts for Most Booked Journeys via MongoDB aggregation
+- **Booking Management & Status Workflow** (`/admin/bookings`): comprehensive bookings table with live search, status filter pills, sorting, CSV export, and dropdown controls to update booking statuses (`Upcoming`, `Confirmed`, `Completed`, `Cancelled`)
 - Add / edit / delete destinations and journeys
 - View every booking made by all users
 

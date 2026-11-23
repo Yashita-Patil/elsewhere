@@ -4137,7 +4137,8 @@ img {
   font-weight: 600;
   cursor: pointer;
   letter-spacing: 0.03em;
-  transition: border-color 150ms ease, background 150ms ease;
+  transition: border-color 150ms ease;
+  background:150ms ease;
 }
 
 .currency-select-input:hover {
@@ -5328,4 +5329,684 @@ img {
   .trip-card-thumb { width: 100%; height: 160px; }
   .modal-summary-grid { grid-template-columns: 1fr; }
   .account-main-content { padding: 20px; }
+}
+
+/* ===== Editorial Status Badges ===== */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 2px;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+.status-badge-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.status-badge.is-upcoming {
+  background: color-mix(in oklab, var(--paper-deep) 70%, var(--background));
+  border-color: var(--border);
+  color: var(--ink-soft);
+}
+.status-badge.is-upcoming .status-badge-dot {
+  background: color-mix(in oklab, var(--rust) 75%, orange);
+}
+.status-badge.is-confirmed {
+  background: color-mix(in oklab, var(--rust) 12%, var(--card));
+  border-color: color-mix(in oklab, var(--rust) 32%, var(--border));
+  color: var(--rust);
+}
+.status-badge.is-confirmed .status-badge-dot {
+  background: var(--rust);
+}
+.status-badge.is-completed {
+  background: color-mix(in oklab, var(--foreground) 6%, var(--card));
+  border-color: var(--border);
+  color: var(--foreground);
+}
+.status-badge.is-completed .status-badge-dot {
+  background: var(--foreground);
+}
+.status-badge.is-cancelled {
+  background: var(--muted);
+  border-color: var(--border);
+  color: var(--muted-foreground);
+  text-decoration: line-through;
+  text-decoration-color: var(--border);
+}
+.status-badge.is-cancelled .status-badge-dot {
+  background: var(--muted-foreground);
+}
+
+/* ===== Admin Panel Header & Layout ===== */
+.admin-heading-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 24px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.admin-heading-block h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 400;
+}
+.admin-heading-block h1 em {
+  color: var(--rust);
+}
+.admin-heading-block .admin-intro {
+  margin: 0;
+}
+
+/* ===== Admin Analytics Dashboard ===== */
+.analytics-section {
+  margin-top: 14px;
+}
+.analytics-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 28px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.analytics-title {
+  margin: 4px 0 6px;
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 400;
+}
+.analytics-title em {
+  color: var(--rust);
+  font-style: italic;
+}
+.analytics-subtitle {
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: 13px;
+  max-width: 580px;
+  line-height: 1.5;
+}
+.analytics-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* KPI Cards */
+.analytics-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.analytics-kpi-card {
+  padding: 24px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  position: relative;
+  transition: border-color 180ms ease;
+}
+.analytics-kpi-card:hover {
+  border-color: color-mix(in oklab, var(--rust) 45%, var(--border));
+}
+.analytics-kpi-card.is-highlight {
+  background: color-mix(in oklab, var(--rust) 4%, var(--card));
+  border-color: color-mix(in oklab, var(--rust) 35%, var(--border));
+}
+.kpi-eyebrow {
+  display: block;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--rust);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.kpi-value {
+  font-family: var(--font-display);
+  font-size: 36px;
+  line-height: 1.1;
+  color: var(--foreground);
+  font-weight: 400;
+  margin-bottom: 6px;
+}
+.kpi-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  margin-bottom: 4px;
+}
+.kpi-detail {
+  margin: 0;
+  font-size: 11px;
+  color: var(--muted-foreground);
+  line-height: 1.4;
+}
+
+/* Status Breakdown Row */
+.analytics-status-breakdown {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin-bottom: 30px;
+}
+.status-breakdown-card {
+  padding: 16px 18px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+}
+.status-breakdown-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.dot-upcoming { background: color-mix(in oklab, var(--rust) 65%, orange); }
+.dot-confirmed { background: var(--rust); }
+.dot-completed { background: var(--foreground); }
+.dot-cancelled { background: var(--muted-foreground); }
+
+.status-title {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.status-count {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--foreground);
+  margin-bottom: 2px;
+}
+.status-percent {
+  font-size: 10px;
+  color: var(--muted-foreground);
+}
+
+/* Most Booked Journeys Chart */
+.analytics-chart-container {
+  padding: 30px 32px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  margin-bottom: 28px;
+}
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 26px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.chart-title {
+  margin: 4px 0 4px;
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 400;
+}
+.chart-title em {
+  color: var(--rust);
+  font-style: italic;
+}
+.chart-subtitle {
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: 12px;
+}
+.chart-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--secondary);
+  border: 1px solid var(--border);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-soft);
+  font-weight: 500;
+  border-radius: 2px;
+}
+.chart-badge svg {
+  width: 13px;
+  height: 13px;
+  color: var(--rust);
+}
+/* SVG Column Bar Chart */
+.svg-chart-wrap {
+  margin: 18px 0 28px;
+  background: var(--background);
+  border: 1px solid var(--border);
+  padding: 16px 14px 10px;
+  border-radius: 2px;
+}
+.editorial-bar-chart {
+  width: 100%;
+  height: auto;
+  max-height: 230px;
+  display: block;
+}
+.chart-axis-text {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  fill: var(--muted-foreground);
+}
+.chart-svg-bar {
+  fill: var(--rust);
+  transition: opacity 180ms ease, fill 180ms ease;
+  cursor: pointer;
+}
+.chart-bar-group:hover .chart-svg-bar {
+  opacity: 0.85;
+  fill: color-mix(in oklab, var(--rust) 85%, #d97706);
+}
+.chart-bar-val {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  fill: var(--foreground);
+}
+.chart-bar-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  fill: var(--ink-soft);
+  font-weight: 500;
+}
+
+.chart-bars-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.chart-bar-row {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  align-items: center;
+  gap: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid color-mix(in oklab, var(--border) 60%, transparent);
+}
+.chart-bar-row:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+.bar-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+.bar-thumb {
+  width: 48px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: 2px;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+}
+.bar-labels {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.bar-journey-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--foreground);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.bar-journey-location {
+  font-size: 11px;
+  color: var(--muted-foreground);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.bar-track-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.bar-track {
+  height: 10px;
+  background: var(--secondary);
+  border-radius: 1px;
+  overflow: hidden;
+  border: 1px solid color-mix(in oklab, var(--border) 50%, transparent);
+}
+.bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--rust), color-mix(in oklab, var(--rust) 85%, #d97706));
+  border-radius: 1px;
+  transition: width 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.bar-metrics {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+}
+.bar-count {
+  color: var(--foreground);
+  font-size: 11px;
+}
+.bar-count strong {
+  color: var(--rust);
+  font-weight: 600;
+}
+.bar-revenue {
+  color: var(--muted-foreground);
+  font-size: 10px;
+}
+
+/* Loading & Empty states */
+.analytics-loading {
+  padding: 80px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  color: var(--muted-foreground);
+  font-size: 12px;
+}
+.analytics-spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--border);
+  border-top-color: var(--rust);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.analytics-empty {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--muted-foreground);
+  background: var(--secondary);
+  border: 1px dashed var(--border);
+  border-radius: 2px;
+}
+.analytics-error {
+  padding: 30px;
+  text-align: center;
+  background: var(--card);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ===== Booking Management Section ===== */
+.booking-mgmt-section {
+  margin-top: 10px;
+}
+.booking-mgmt-toolbar {
+  margin-bottom: 16px;
+}
+.admin-subheading {
+  margin: 2px 0 4px;
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 400;
+}
+.admin-subheading em {
+  color: var(--rust);
+  font-style: italic;
+}
+.booking-count-sub {
+  color: var(--muted-foreground);
+  font-size: 12px;
+}
+.booking-filter-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+.booking-search-wrap {
+  position: relative;
+  width: min(340px, 100%);
+}
+.booking-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  color: var(--muted-foreground);
+  pointer-events: none;
+}
+.booking-search-input {
+  padding-left: 36px;
+  height: 38px;
+  font-size: 11px;
+  background: var(--card);
+  border-radius: 2px;
+}
+.booking-status-filter-pills {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.filter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--ink-soft);
+  font-size: 11px;
+  border-radius: 2px;
+  transition: all 160ms ease;
+}
+.filter-pill:hover {
+  border-color: var(--foreground);
+  color: var(--foreground);
+}
+.filter-pill.is-active {
+  background: var(--foreground);
+  color: var(--background);
+  border-color: var(--foreground);
+}
+.filter-pill .pill-count {
+  font-size: 9px;
+  padding: 1px 5px;
+  border-radius: 10px;
+  background: color-mix(in oklab, var(--border) 60%, transparent);
+  color: inherit;
+}
+.filter-pill.is-active .pill-count {
+  background: color-mix(in oklab, var(--background) 25%, transparent);
+  color: var(--background);
+}
+.booking-toast {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: color-mix(in oklab, var(--rust) 10%, var(--card));
+  border: 1px solid color-mix(in oklab, var(--rust) 35%, var(--border));
+  color: var(--foreground);
+  font-size: 12px;
+  border-radius: 2px;
+  margin-bottom: 14px;
+  animation: fadeIn 200ms ease;
+}
+.booking-toast svg {
+  width: 14px;
+  height: 14px;
+  color: var(--rust);
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.booking-code-cell {
+  white-space: nowrap;
+}
+.booking-code-tag {
+  font-family: monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 3px 6px;
+  background: var(--secondary);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  color: var(--foreground);
+}
+.booking-customer-cell {
+  min-width: 140px;
+}
+.customer-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.customer-info strong {
+  color: var(--foreground);
+  font-weight: 500;
+  font-size: 12px;
+}
+.customer-info span {
+  color: var(--muted-foreground);
+  font-size: 10px;
+}
+.booking-journey-cell {
+  min-width: 150px;
+}
+.journey-location-sub {
+  display: block;
+  color: var(--muted-foreground);
+  font-size: 10px;
+}
+.booking-price-cell {
+  font-weight: 600;
+  color: var(--foreground);
+  white-space: nowrap;
+}
+.status-select-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.status-dropdown {
+  height: 32px;
+  padding: 0 8px;
+  border: 1px solid var(--border);
+  background: var(--background);
+  color: var(--foreground);
+  font-size: 11px;
+  border-radius: 2px;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 160ms ease;
+}
+.status-dropdown:focus {
+  border-color: var(--rust);
+}
+.status-dropdown:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.updating-indicator {
+  font-size: 10px;
+  color: var(--rust);
+  font-style: italic;
+}
+.is-row-updating {
+  background: color-mix(in oklab, var(--rust) 4%, transparent);
+}
+
+.booking-mgmt-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.booking-sort-wrap {
+  display: flex;
+  align-items: center;
+}
+.booking-sort-select {
+  height: 38px;
+  background: var(--card);
+}
+.booking-date-cell {
+  white-space: nowrap;
+  font-size: 11px;
+  color: var(--foreground);
+}
+.admin-delete-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--muted-foreground);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 160ms ease;
+}
+.admin-delete-btn:hover {
+  background: color-mix(in oklab, var(--destructive) 10%, transparent);
+  border-color: color-mix(in oklab, var(--destructive) 30%, transparent);
+  color: var(--destructive);
+}
+.admin-delete-btn svg {
+  width: 14px;
+  height: 14px;
+}
+.admin-delete-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .chart-bar-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .booking-filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .booking-search-wrap {
+    width: 100%;
+  }
 }

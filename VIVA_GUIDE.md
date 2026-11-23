@@ -8,8 +8,9 @@
 5. **Save a place, book a journey** → open *My trips*. "The total is calculated on the server."
 6. **Cancel the booking** → status changes to *Cancelled* (updated in the database).
 7. **Open a destination page** (`/destinations/bali`) — dynamic route using the slug.
-8. **Log in as admin** → *Admin* → add a destination → it appears on the home page. Show *Bookings* tab (all users).
-9. **Open MongoDB Compass** (or mongosh) and show the 4 collections — proves the data is real.
+8. **Log in as admin** → *Admin* → show **Overview & Analytics** (live KPI cards, revenue calculations, and MongoDB aggregation bar chart for top journeys).
+9. **Booking Management** → filter by status, search by customer/code, export CSV, and change a status dropdown from *Upcoming* to *Confirmed* or *Completed*. Show how it persists immediately and updates the customer's *My trips* dialog.
+10. **Open MongoDB Compass** (or mongosh) and show the 4 collections — proves the data is real.
 
 ## Questions you may be asked
 
