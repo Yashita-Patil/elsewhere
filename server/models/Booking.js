@@ -11,7 +11,16 @@ const bookingSchema = new mongoose.Schema(
     travelDate: { type: Date, required: true },
     travelers: { type: Number, required: true, min: 1, max: 6 },
     totalPrice: { type: Number, required: true },
-    status: { type: String, enum: ["Upcoming", "Cancelled"], default: "Upcoming" },
+    status: {
+      type: String,
+      enum: ["Upcoming", "Confirmed", "Completed", "Cancelled"],
+      default: "Upcoming",
+    },
+    paymentStatus: {
+      type: String,
+      enum: ["Paid", "Unpaid", "Refunded"],
+      default: "Paid",
+    },
   },
   { timestamps: true },
 );

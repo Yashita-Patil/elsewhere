@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight, X } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "./ui/Dialog";
 import Button from "./ui/Button";
+import StatusBadge from "./ui/StatusBadge";
 import { api } from "../api";
 import { useAuth } from "../context/AuthContext";
 import { useModals } from "../context/ModalContext";
@@ -93,21 +94,24 @@ export default function DashboardDialog() {
 
           <div className="dashboard-section-title booking-title">
             <h3>Trip enquiries</h3>
-            <span>{bookings.filter((item) => item.status === "Upcoming").length} upcoming</span>
+            <span>{bookings.filter((item) => ["Upcoming", "Confirmed"].includes(item.status)).length} active</span>
           </div>
           {bookings.length ? (
             <div className="booking-list">
               {bookings.map((booking) => (
                 <div className="booking-row" key={booking._id}>
                   <div className="booking-row-heading">
-                    <div><strong>{booking.title}</strong><span>{booking.location}</span></div>
-                    <span className={booking.status === "Upcoming" ? "status-pill" : "status-pill is-cancelled"}>{booking.status}</span>
+                    <div>
+                      <strong>{booking.title}</strong>
+                      <span>{booking.location} · {booking.bookingCode}</span>
+                    </div>
+                    <StatusBadge status={booking.status} />
                   </div>
                   <div className="booking-row-meta">
                     <span>{formatDate(booking.travelDate)} · {booking.travelers} travelers</span>
                     <span>{formatPrice(booking.totalPrice)}</span>
                   </div>
-                  {booking.status === "Upcoming" && (
+                  {["Upcoming", "Confirmed"].includes(booking.status) && (
                     <Button variant="ghost" className="cancel-booking" onClick={() => cancelBooking(booking._id)}>Cancel enquiry</Button>
                   )}
                 </div>

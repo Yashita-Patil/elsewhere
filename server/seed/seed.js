@@ -35,9 +35,93 @@ async function seed() {
   const adminEmail = process.env.ADMIN_EMAIL || "admin@elsewhere.com";
   const adminPassword = process.env.ADMIN_PASSWORD || "Admin@123";
   await User.create({ name: "Admin", email: adminEmail, password: adminPassword, role: "admin" });
-  await User.create({ name: "Demo Traveler", email: "demo@elsewhere.com", password: "Demo@123" });
+  const demoUser = await User.create({ name: "Demo Traveler", email: "demo@elsewhere.com", password: "Demo@123" });
+  const sophiaUser = await User.create({ name: "Sophia Laurent", email: "sophia@example.com", password: "Demo@123" });
+  const liamUser = await User.create({ name: "Liam Chen", email: "liam@example.com", password: "Demo@123" });
 
-  console.log(`Seeded ${savedDestinations.length} destinations, ${packages.length} packages and 2 users`);
+  // 5. Initial sample bookings across journeys and statuses
+  const savedPackages = await Package.find();
+  if (savedPackages.length >= 4) {
+    const sampleBookings = [
+      {
+        bookingCode: "EL-841920",
+        user: demoUser._id,
+        package: savedPackages[0]._id,
+        title: savedPackages[0].title,
+        location: savedPackages[0].location,
+        travelDate: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
+        travelers: 2,
+        totalPrice: savedPackages[0].price * 2,
+        status: "Upcoming",
+        paymentStatus: "Paid",
+      },
+      {
+        bookingCode: "EL-521943",
+        user: sophiaUser._id,
+        package: savedPackages[0]._id,
+        title: savedPackages[0].title,
+        location: savedPackages[0].location,
+        travelDate: new Date(Date.now() + 1000 * 60 * 60 * 24 * 45),
+        travelers: 3,
+        totalPrice: savedPackages[0].price * 3,
+        status: "Confirmed",
+        paymentStatus: "Paid",
+      },
+      {
+        bookingCode: "EL-391048",
+        user: demoUser._id,
+        package: savedPackages[1]._id,
+        title: savedPackages[1].title,
+        location: savedPackages[1].location,
+        travelDate: new Date(Date.now() + 1000 * 60 * 60 * 24 * 60),
+        travelers: 2,
+        totalPrice: savedPackages[1].price * 2,
+        status: "Confirmed",
+        paymentStatus: "Paid",
+      },
+      {
+        bookingCode: "EL-194820",
+        user: liamUser._id,
+        package: savedPackages[2]._id,
+        title: savedPackages[2].title,
+        location: savedPackages[2].location,
+        travelDate: new Date(Date.now() - 1000 * 60 * 60 * 24 * 14),
+        travelers: 1,
+        totalPrice: savedPackages[2].price * 1,
+        status: "Completed",
+        paymentStatus: "Paid",
+      },
+      {
+        bookingCode: "EL-948123",
+        user: sophiaUser._id,
+        package: savedPackages[1]._id,
+        title: savedPackages[1].title,
+        location: savedPackages[1].location,
+        travelDate: new Date(Date.now() - 1000 * 60 * 60 * 24 * 5),
+        travelers: 2,
+        totalPrice: savedPackages[1].price * 2,
+        status: "Completed",
+        paymentStatus: "Paid",
+      },
+      {
+        bookingCode: "EL-610294",
+        user: demoUser._id,
+        package: savedPackages[3]._id,
+        title: savedPackages[3].title,
+        location: savedPackages[3].location,
+        travelDate: new Date(Date.now() + 1000 * 60 * 60 * 24 * 90),
+        travelers: 2,
+        totalPrice: savedPackages[3].price * 2,
+        status: "Cancelled",
+        paymentStatus: "Refunded",
+      },
+    ];
+
+    await Booking.insertMany(sampleBookings);
+    console.log(`Seeded ${sampleBookings.length} bookings`);
+  }
+
+  console.log(`Seeded ${savedDestinations.length} destinations, ${packages.length} packages and users`);
   console.log(`Admin login: ${adminEmail} / ${adminPassword}`);
   console.log("Demo login:  demo@elsewhere.com / Demo@123");
   await mongoose.disconnect();
