@@ -14,6 +14,7 @@ import BookingDialog from "../components/BookingDialog";
 import { api } from "../api";
 import { useAuth } from "../context/AuthContext";
 import { useModals } from "../context/ModalContext";
+import { useCurrency } from "../context/CurrencyContext";
 import { experiences, experienceToCategory, features, packageCategories } from "../utils/constants";
 import usePageTitle from "../utils/usePageTitle";
 
@@ -21,6 +22,7 @@ export default function Home() {
   usePageTitle("Elsewhere — Travel, thoughtfully made");
   const { user, toggleSaved } = useAuth();
   const { openLogin, openDashboard } = useModals();
+  const { formatPrice, currency } = useCurrency();
 
   // ----- search bar at the top -----
   const [searchText, setSearchText] = useState("");
@@ -257,10 +259,12 @@ export default function Home() {
               <label>
                 <span className="sr-only">Maximum price</span>
                 <select aria-label="Maximum price" value={priceLimit} onChange={(event) => setPriceLimit(event.target.value)}>
-                  <option>Any price</option>
-                  <option value="2000">Under $2,000</option>
-                  <option value="2500">Under $2,500</option>
-                  <option value="3000">Under $3,000</option>
+                  <option value="Any price">Any price</option>
+                  <option value="1500">Under {formatPrice(1500)}</option>
+                  <option value="2000">Under {formatPrice(2000)}</option>
+                  <option value="2500">Under {formatPrice(2500)}</option>
+                  <option value="3000">Under {formatPrice(3000)}</option>
+                  <option value="4000">Under {formatPrice(4000)}</option>
                 </select>
                 <ChevronDown aria-hidden="true" />
               </label>
@@ -370,6 +374,7 @@ export default function Home() {
         destinations={destinations}
         notice={notice}
         onSubmit={handlePlannerSubmit}
+        onSelectPackageForBooking={handleBook}
       />
       <BookingDialog
         item={bookingPackage}

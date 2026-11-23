@@ -4,12 +4,21 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import Button from "./ui/Button";
 import Input from "./ui/Input";
 import { api } from "../api";
-import { formatPrice, today } from "../utils/format";
+import { useCurrency } from "../context/CurrencyContext";
+import { today } from "../utils/format";
 import { travelerOptions } from "../utils/constants";
 
-// The "Enquire about this trip" popup. Used on the home page and on the destination page.
+// The "Enquire about this trip" popup. Used on the home page and on the destination/package page.
 // item = the package being booked (null = popup closed)
-export default function BookingDialog({ item, onClose, onBooked, defaultDate = "", defaultTravelers = 2, showPreview = false }) {
+export default function BookingDialog({
+  item,
+  onClose,
+  onBooked,
+  defaultDate = "",
+  defaultTravelers = 2,
+  showPreview = false,
+}) {
+  const { formatPrice } = useCurrency();
   const [date, setDate] = useState(defaultDate);
   const [travelers, setTravelers] = useState(defaultTravelers);
   const [error, setError] = useState("");
@@ -30,7 +39,11 @@ export default function BookingDialog({ item, onClose, onBooked, defaultDate = "
     setSaving(true);
     setError("");
     try {
-      const booking = await api.post("/bookings", { packageId: item._id, travelDate: date, travelers });
+      const booking = await api.post("/bookings", {
+        packageId: item._id,
+        travelDate: date,
+        travelers,
+      });
       onBooked(booking);
     } catch (err) {
       setError(err.message);
@@ -43,7 +56,10 @@ export default function BookingDialog({ item, onClose, onBooked, defaultDate = "
     <Dialog open={Boolean(item)} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className={showPreview ? "travel-dialog booking-dialog" : "travel-dialog"}>
         <DialogHeader>
-          <p className="eyebrow"><span className="eyebrow-line" />Your next chapter</p>
+          <p className="eyebrow">
+            <span className="eyebrow-line" />
+            Your next chapter
+          </p>
           <DialogTitle>{item?.title ?? "Your journey"}</DialogTitle>
           <DialogDescription>
             {item?.location} · from {item ? formatPrice(item.price) : ""} per person
@@ -54,24 +70,49 @@ export default function BookingDialog({ item, onClose, onBooked, defaultDate = "
           <>
             {showPreview && (
               <>
-                <img className="booking-thumb" src={item.image} alt={item.location} width={1280} height={960} />
+                <img
+                  className="booking-thumb"
+                  src={item.image}
+                  alt={item.location}
+                  width={1280}
+                  height={960}
+                />
                 <p className="booking-description">{item.description}</p>
               </>
             )}
             <form className="dialog-form" onSubmit={handleSubmit}>
-              <label>When shall we start?
-                <Input type="date" required value={date} min={today()} onChange={(event) => setDate(event.target.value)} />
+              <label>
+                When shall we start?
+                <Input
+                  type="date"
+                  required
+                  value={date}
+                  min={today()}
+                  onChange={(event) => setDate(event.target.value)}
+                />
               </label>
-              <label>Who’s coming?
-                <select value={travelers} onChange={(event) => setTravelers(Number(event.target.value))}>
+              <label>
+                Who’s coming?
+                <select
+                  value={travelers}
+                  onChange={(event) => setTravelers(Number(event.target.value))}
+                >
                   {travelerOptions.map((count) => (
-                    <option key={count} value={count}>{count} {count === 1 ? "traveler" : "travelers"}</option>
+                    <option key={count} value={count}>
+                      {count} {count === 1 ? "traveler" : "travelers"}
+                    </option>
                   ))}
                 </select>
               </label>
-              <p className="price-summary">Estimated total <strong>{formatPrice(item.price * travelers)}</strong></p>
+              <p className="price-summary">
+                Estimated total <strong>{formatPrice(item.price * travelers)}</strong>
+              </p>
               <p className="fine-print">This saves your enquiry only. No payment is taken.</p>
-              {error && <p className="form-error" role="alert">{error}</p>}
+              {error && (
+                <p className="form-error" role="alert">
+                  {error}
+                </p>
+              )}
               <Button type="submit" className="dialog-submit" disabled={saving}>
                 {saving ? "Saving…" : "Save my enquiry"} <ArrowRight aria-hidden="true" />
               </Button>

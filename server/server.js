@@ -17,6 +17,7 @@ import destinationRoutes from "./routes/destinationRoutes.js";
 import packageRoutes from "./routes/packageRoutes.js";
 import bookingRoutes from "./routes/bookingRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import reviewRoutes from "./routes/reviewRoutes.js";
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use("/api/destinations", destinationRoutes);
 app.use("/api/packages", packageRoutes);
 app.use("/api/bookings", bookingRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/reviews", reviewRoutes);
 app.use("/api", notFound); // any other /api/... URL
 
 // ----- Production: serve the built React app from this same server -----

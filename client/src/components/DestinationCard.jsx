@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight, Heart } from "lucide-react";
 import Button from "./ui/Button";
-import { formatPrice } from "../utils/format";
+import { useCurrency } from "../context/CurrencyContext";
 
 export default function DestinationCard({ destination, index, total, saved, onToggleSaved }) {
+  const { formatPrice } = useCurrency();
   const saveLabel = saved ? `Remove ${destination.name} from saved places` : `Save ${destination.name}`;
 
   return (

@@ -6,12 +6,14 @@ import Button from "./ui/Button";
 import { api } from "../api";
 import { useAuth } from "../context/AuthContext";
 import { useModals } from "../context/ModalContext";
-import { formatDate, formatPrice } from "../utils/format";
+import { useCurrency } from "../context/CurrencyContext";
+import { formatDate } from "../utils/format";
 
 // The "My trips" popup: saved places + booking enquiries
 export default function DashboardDialog() {
   const { user, logout, toggleSaved } = useAuth();
   const { dashboardOpen, setDashboardOpen } = useModals();
+  const { formatPrice } = useCurrency();
   const [savedPlaces, setSavedPlaces] = useState([]);
   const [bookings, setBookings] = useState([]);
   const [error, setError] = useState("");

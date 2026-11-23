@@ -1,21 +1,24 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, ArrowRight, ArrowUpRight, Check, Heart, MapPin, Star } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, Check, Eye, Heart, MapPin, Star } from "lucide-react";
 import Button from "../components/ui/Button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "../components/ui/Dialog";
 import BookingDialog from "../components/BookingDialog";
+import CurrencySelector from "../components/CurrencySelector";
+import ReviewsSection from "../components/ReviewsSection";
 import EmptyState from "../components/EmptyState";
 import NotFound from "./NotFound";
 import { api } from "../api";
 import { useAuth } from "../context/AuthContext";
 import { useModals } from "../context/ModalContext";
-import { formatPrice } from "../utils/format";
+import { useCurrency } from "../context/CurrencyContext";
 import usePageTitle from "../utils/usePageTitle";
 
 export default function DestinationDetail() {
   const { slug } = useParams(); // e.g. "bali" from /destinations/bali
   const { user, loading: authLoading, toggleSaved } = useAuth();
   const { openLogin } = useModals();
+  const { formatPrice } = useCurrency();
 
   const [destination, setDestination] = useState(null);
   const [packages, setPackages] = useState([]);
@@ -78,11 +81,16 @@ export default function DestinationDetail() {
   return (
     <main className="destination-page">
       <header className="detail-topbar">
-        <Link to="/" className="wordmark" aria-label="Elsewhere home">elsewhere<span>.</span></Link>
-        <Link to="/" className="detail-back"><ArrowLeft aria-hidden="true" /> All destinations</Link>
-        <Button asChild className="header-plan">
-          <Link to="/#packages">Find your journey <ArrowUpRight aria-hidden="true" /></Link>
-        </Button>
+        <div style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
+          <Link to="/" className="wordmark" aria-label="Elsewhere home">elsewhere<span>.</span></Link>
+          <Link to="/" className="detail-back"><ArrowLeft aria-hidden="true" /> All destinations</Link>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+          <CurrencySelector />
+          <Button asChild className="header-plan">
+            <Link to="/#packages">Find your journey <ArrowUpRight aria-hidden="true" /></Link>
+          </Button>
+        </div>
       </header>
 
       <section className="detail-cover" aria-label={`${destination.name}, ${destination.country}`}>
@@ -138,17 +146,32 @@ export default function DestinationDetail() {
             <div className="detail-package-grid">
               {packages.map((item) => (
                 <article className="detail-package-card" key={item._id}>
-                  <img src={item.image} alt={item.location} loading="lazy" width={1280} height={960} />
+                  <Link to={`/packages/${item._id}`}>
+                    <img src={item.image} alt={item.location} loading="lazy" width={1280} height={960} />
+                  </Link>
                   <div className="detail-package-info">
                     <div className="detail-package-meta">
                       <span>{item.duration} days · {item.category}</span>
-                      <span><Star fill="currentColor" aria-hidden="true" /> {item.rating.toFixed(2)}</span>
+                      <span><Star fill="currentColor" aria-hidden="true" /> {Number(item.rating || 5).toFixed(2)}</span>
                     </div>
-                    <h3>{item.title}</h3>
+                    <h3>
+                      <Link to={`/packages/${item._id}`} style={{ color: "inherit" }}>
+                        {item.title}
+                      </Link>
+                    </h3>
                     <p>{item.description}</p>
                     <div className="detail-package-bottom">
                       <span>From <strong>{formatPrice(item.price)}</strong> / person</span>
-                      <Button className="detail-enquire" onClick={() => handleEnquire(item)}>Enquire <ArrowUpRight aria-hidden="true" /></Button>
+                      <div style={{ display: "flex", gap: "0.5rem" }}>
+                        <Button asChild variant="outline" size="sm">
+                          <Link to={`/packages/${item._id}`}>
+                            Details <Eye className="w-3.5 h-3.5 ml-1" />
+                          </Link>
+                        </Button>
+                        <Button className="detail-enquire" onClick={() => handleEnquire(item)}>
+                          Enquire <ArrowUpRight aria-hidden="true" />
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </article>
@@ -160,6 +183,11 @@ export default function DestinationDetail() {
           <Link to="/#packages" className="detail-all-link">See every journey <ArrowRight aria-hidden="true" /></Link>
         </div>
       </section>
+
+      {/* Destination Reviews Section */}
+      <div className="page-wrap" style={{ marginTop: "3rem", marginBottom: "3rem" }}>
+        <ReviewsSection destinationId={destination._id} itemTitle={destination.name} />
+      </div>
 
       <footer className="detail-footer">
         <Link to="/" className="wordmark">elsewhere<span>.</span></Link>

@@ -6,8 +6,10 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "dev": "node --watch server.js",
+    "dev": "nodemon server.js",
     "seed": "node seed/seed.js",
+    "test": "node test-all-features.js",
+    "test:http": "node test-http-api.js",
     "start:prod": "cross-env NODE_ENV=production node server.js"
   },
   "dependencies": {
@@ -20,5 +22,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.5.1",
     "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }
