@@ -296,31 +296,33 @@ export default function Account() {
     <main className="account-page">
       {/* Top Navigation Bar */}
       <header className="detail-topbar account-topbar">
-        {/* Far Left: Back Arrow */}
-        <button
-          type="button"
-          className="account-nav-back"
-          title="Go Back"
-          aria-label="Go Back"
-          onClick={() => {
-            if (window.history.length > 1) {
-              navigate(-1);
-            } else {
-              navigate("/");
-            }
-          }}
-        >
-          <ArrowLeft size={18} aria-hidden="true" />
-        </button>
+        {/* Far Left: Back Arrow + Wordmark + Page Label */}
+        <div className="account-topbar-left">
+          <button
+            type="button"
+            className="account-nav-back"
+            title="Go Back"
+            aria-label="Go Back"
+            onClick={() => {
+              if (window.history.length > 1) {
+                navigate(-1);
+              } else {
+                navigate("/");
+              }
+            }}
+          >
+            <ArrowLeft size={18} aria-hidden="true" />
+          </button>
 
-        {/* Center: Brand wordmark */}
-        <Link to="/" className="wordmark" aria-label="Elsewhere home">
-          elsewhere<span>.</span>
-        </Link>
+          <Link to="/" className="wordmark" aria-label="Elsewhere home">
+            elsewhere<span>.</span>
+          </Link>
+
+          <span className="account-topbar-label">My Account</span>
+        </div>
 
         {/* Far Right: Nav links + Sign Out */}
         <div className="account-topbar-right">
-          <span className="account-topbar-label">My Account</span>
           <Button asChild variant="ghost" size="sm" className="account-home-link">
             <Link to="/#destinations">
               Explore places <ArrowUpRight size={14} aria-hidden="true" />

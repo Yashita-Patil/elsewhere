@@ -51,7 +51,7 @@ export default function Header({ onPlan }) {
                   {user.name.charAt(0).toUpperCase()}
                 </span>
               )}
-              {" "}My Account
+              <span>My Account</span>
             </Link>
           </Button>
         ) : (

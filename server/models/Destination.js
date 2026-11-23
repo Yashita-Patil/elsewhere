@@ -14,6 +14,23 @@ const destinationSchema = new mongoose.Schema(
     rating: { type: Number, default: 5, min: 0, max: 5 },
     numReviews: { type: Number, default: 0, min: 0 },
     highlights: [{ type: String }],
+    gallery: [{ type: String }],
+    roamPlaces: [
+      {
+        name: { type: String, required: true },
+        image: { type: String, required: true },
+        description: { type: String },
+      },
+    ],
+    hospitality: [
+      {
+        name: { type: String, required: true },
+        image: { type: String, required: true },
+        type: { type: String },
+        description: { type: String },
+        rating: { type: Number, default: 5 },
+      },
+    ],
     category: { type: String, required: true, trim: true },
   },
   { timestamps: true },

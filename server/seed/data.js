@@ -16,6 +16,49 @@ export const destinations = [
     rating: 4.98,
     numReviews: 14,
     highlights: ["Private boat to Capri", "A table in Ravello", "The Path of the Gods"],
+    gallery: [
+      "https://images.unsplash.com/photo-1533105079780-92b9be482077?w=1280&q=80",
+      "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=1280&q=80",
+      "https://images.unsplash.com/photo-1533900298318-6b8da08a523e?w=1280&q=80",
+    ],
+    roamPlaces: [
+      {
+        name: "Positano Cliffside Terraces",
+        image: "https://images.unsplash.com/photo-1533105079780-92b9be482077?w=900&q=80",
+        description: "Pastel houses cascading toward sapphire water, lined with artisanal linen shops and fragrant lemon groves.",
+      },
+      {
+        name: "Isle of Capri & Faraglioni",
+        image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=900&q=80",
+        description: "Soaring limestone sea stacks rising from deep blue waters, explored best by wooden gozzo boat.",
+      },
+      {
+        name: "Path of the Gods (Sentiero degli Dei)",
+        image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=900&q=80",
+        description: "Ancient high trail suspension with sweeping views over the entire Sorrentine peninsula.",
+      },
+      {
+        name: "Ravello Cliffside Gardens",
+        image: "https://images.unsplash.com/photo-1543429776-2782fc8e1acd?w=900&q=80",
+        description: "Quiet medieval cloisters and dramatic belvederes overlooking the Tyrrhenian Sea.",
+      },
+    ],
+    hospitality: [
+      {
+        name: "Villa Cimbrone Cliffside Retreat",
+        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=900&q=80",
+        type: "Historic Luxury Villa",
+        description: "11th-century cliffside palace with private gardens, infinity pools, and panoramic sea vistas.",
+        rating: 5,
+      },
+      {
+        name: "Palazzo Avino Pink Sanctuary",
+        image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=900&q=80",
+        type: "5-Star Boutique Haven",
+        description: "A 12th-century medieval villa perched 1,000 feet above the coast with Michelin-starred dining.",
+        rating: 4.9,
+      },
+    ],
     category: "Coast",
   },
   {
@@ -32,6 +75,49 @@ export const destinations = [
     rating: 4.96,
     numReviews: 18,
     highlights: ["Uluwatu at sunset", "Ubud rice terraces", "A day on the water"],
+    gallery: [
+      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=1280&q=80",
+      "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=1280&q=80",
+      "https://images.unsplash.com/photo-1559628233-eb1b1a45564b?w=1280&q=80",
+    ],
+    roamPlaces: [
+      {
+        name: "Tegallalang Emerald Terraces",
+        image: "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=900&q=80",
+        description: "Cascading rice paddies fed by traditional subak irrigation systems under morning tropical mist.",
+      },
+      {
+        name: "Uluwatu Ocean Cliff Temple",
+        image: "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?w=900&q=80",
+        description: "Perched atop steep ocean limestone cliffs where evening Kecak fire dances meet crashing surf.",
+      },
+      {
+        name: "Nusa Penida Coastal Arches",
+        image: "https://images.unsplash.com/photo-1559628233-eb1b1a45564b?w=900&q=80",
+        description: "Dramatic T-Rex cliff formations, turquoise lagoons, and untouched white sand shores.",
+      },
+      {
+        name: "Sacred Monkey Forest Sanctuary",
+        image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=900&q=80",
+        description: "Moss-covered stone statues and ancient banyan trees deep in Ubud's spiritual heartland.",
+      },
+    ],
+    hospitality: [
+      {
+        name: "Hanging Gardens Rainforest Resort",
+        image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=900&q=80",
+        type: "Luxury Jungle Haven",
+        description: "Multi-tiered infinity pool suspended over the Ayung River valley canopy.",
+        rating: 5,
+      },
+      {
+        name: "Amankila Cliffside Pavilions",
+        image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=900&q=80",
+        type: "Beachfront Villa Retreat",
+        description: "Elevated thatched villas overlooking the Lombok Strait and peaceful Mount Agung.",
+        rating: 4.9,
+      },
+    ],
     category: "Island",
   },
   {
@@ -48,6 +134,44 @@ export const destinations = [
     rating: 4.99,
     numReviews: 12,
     highlights: ["Scenic rail journeys", "A private mountain guide", "Lake-side picnics"],
+    gallery: [
+      "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?w=1280&q=80",
+      "https://images.unsplash.com/photo-1502784444187-359ac186c5bb?w=1280&q=80",
+      "https://images.unsplash.com/photo-1491557345352-5929e343eb89?w=1280&q=80",
+    ],
+    roamPlaces: [
+      {
+        name: "Zermatt & The Matterhorn",
+        image: "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?w=900&q=80",
+        description: "Car-free alpine village dominated by the legendary pyramidal tooth of the Matterhorn.",
+      },
+      {
+        name: "Lauterbrunnen 72 Waterfalls",
+        image: "https://images.unsplash.com/photo-1491557345352-5929e343eb89?w=900&q=80",
+        description: "A dramatic glacial valley surrounded by towering vertical cliffs and glacial melt waterfalls.",
+      },
+      {
+        name: "Lake Lucerne Fjord Pathways",
+        image: "https://images.unsplash.com/photo-1502784444187-359ac186c5bb?w=900&q=80",
+        description: "Mirror-clear waters framed by Mount Rigi, historic paddle steamers, and quiet forest coves.",
+      },
+    ],
+    hospitality: [
+      {
+        name: "The Chedi Andermatt Lodge",
+        image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=900&q=80",
+        type: "5-Star Alpine Sanctuary",
+        description: "Wood and stone warmth combining Asian serenity with Swiss precision and open fireplaces.",
+        rating: 5,
+      },
+      {
+        name: "Hotel Villa Honegg",
+        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=900&q=80",
+        type: "Boutique Mountain Spa",
+        description: "World-famous outdoor infinity thermal pool looking over the entire Lake Lucerne expanse.",
+        rating: 4.9,
+      },
+    ],
     category: "Mountain",
   },
   {
@@ -64,6 +188,44 @@ export const destinations = [
     rating: 4.94,
     numReviews: 15,
     highlights: ["Island-hopping by long-tail boat", "Hidden lagoons", "Thai cooking at home"],
+    gallery: [
+      "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=1280&q=80",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1280&q=80",
+      "https://images.unsplash.com/photo-1537956965359-7573183d1f57?w=1280&q=80",
+    ],
+    roamPlaces: [
+      {
+        name: "Phang Nga Emerald Karsts",
+        image: "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=900&q=80",
+        description: "Towering limestone pillars rising straight from green waters, explored quietly by sea kayak.",
+      },
+      {
+        name: "Railay Beach & Phra Nang Cave",
+        image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=80",
+        description: "Secluded peninsula accessible only by boat, famed for world-class rock climbs and calm sunsets.",
+      },
+      {
+        name: "Maya Bay & Koh Phi Phi Leh",
+        image: "https://images.unsplash.com/photo-1537956965359-7573183d1f57?w=900&q=80",
+        description: "Ringed by 100-meter cliffs, sheltered coral reefs, and untouched soft sand beaches.",
+      },
+    ],
+    hospitality: [
+      {
+        name: "Rayavadee Krabi Pavilion",
+        image: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=900&q=80",
+        type: "Luxury Beachfront Sanctuary",
+        description: "Hidden circular pavilions set within lush coconut groves at the edge of Krabi Marine National Park.",
+        rating: 5,
+      },
+      {
+        name: "Six Senses Yao Noi Hideaway",
+        image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=900&q=80",
+        type: "Eco-Luxury Pool Villa",
+        description: "Private infinity pools looking across the surreal limestone landscape of Phang Nga Bay.",
+        rating: 4.9,
+      },
+    ],
     category: "Island",
   },
   {
@@ -80,6 +242,44 @@ export const destinations = [
     rating: 4.95,
     numReviews: 11,
     highlights: ["Moraine Lake at dawn", "A guided alpine walk", "Cabin nights in Banff"],
+    gallery: [
+      "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?w=1280&q=80",
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1280&q=80",
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1280&q=80",
+    ],
+    roamPlaces: [
+      {
+        name: "Valley of the Ten Peaks & Moraine Lake",
+        image: "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?w=900&q=80",
+        description: "Electric turquoise glacial water reflecting ten snow-dusted jagged Canadian peaks at sunrise.",
+      },
+      {
+        name: "Icefields Parkway High Road",
+        image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=900&q=80",
+        description: "One of the most scenic highway routes in the world, tracing colossal glaciers and hanging ice falls.",
+      },
+      {
+        name: "Lake Louise Alpine Shoreline",
+        image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=900&q=80",
+        description: "Canoe along still glacial waters under the immense Victoria Glacier ice sheet.",
+      },
+    ],
+    hospitality: [
+      {
+        name: "Fairmont Chateau Lake Louise",
+        image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=900&q=80",
+        type: "Historic Alpine Resort",
+        description: "Heritage grand hotel sitting right on the shore of Lake Louise within Banff National Park.",
+        rating: 5,
+      },
+      {
+        name: "Post Hotel & Spa Lake Louise",
+        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=900&q=80",
+        type: "Relais & Châteaux Mountain Lodge",
+        description: "Cozy timber lodge featuring an acclaimed wine cellar and serene Roman baths.",
+        rating: 4.8,
+      },
+    ],
     category: "Mountain",
   },
   {
@@ -96,6 +296,44 @@ export const destinations = [
     rating: 4.97,
     numReviews: 16,
     highlights: ["Expert local naturalists", "Small-camp stays", "Golden-hour game drives"],
+    gallery: [
+      "https://images.unsplash.com/photo-1516426122078-c23e76319801?w=1280&q=80",
+      "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=1280&q=80",
+      "https://images.unsplash.com/photo-1534177616072-ef7dc120449d?w=1280&q=80",
+    ],
+    roamPlaces: [
+      {
+        name: "The Endless Plains (Siringitu)",
+        image: "https://images.unsplash.com/photo-1516426122078-c23e76319801?w=900&q=80",
+        description: "Sweeping savannah skies where millions of wildebeest and zebras follow ancient migratory cycles.",
+      },
+      {
+        name: "Ngorongoro Crater Caldera",
+        image: "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=900&q=80",
+        description: "Unbroken volcanic amphitheater sheltering black rhinos, lion prides, and pink flamingo flocks.",
+      },
+      {
+        name: "Seronera River Wildlife Corridor",
+        image: "https://images.unsplash.com/photo-1534177616072-ef7dc120449d?w=900&q=80",
+        description: "Yellow acacia trees along the riverbanks favored by leopards and resident pride lionesses.",
+      },
+    ],
+    hospitality: [
+      {
+        name: "Singita Sasakwa Safari Lodge",
+        image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=900&q=80",
+        type: "Luxury Private Reserve Lodge",
+        description: "Panoramic cliffside manor house overlooking the vast Serengeti plains with private plunge pools.",
+        rating: 5,
+      },
+      {
+        name: "Four Seasons Safari Lodge Serengeti",
+        image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=900&q=80",
+        type: "Wilderness Oasis",
+        description: "Elevated suites and infinity pool directly overlooking an active watering hole frequented by elephants.",
+        rating: 4.9,
+      },
+    ],
     category: "Wildlife",
   },
   {
@@ -112,6 +350,44 @@ export const destinations = [
     rating: 4.95,
     numReviews: 13,
     highlights: ["A morning in Gion", "Tea with a local host", "Garden and temple walks"],
+    gallery: [
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=1280&q=80",
+      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?w=1280&q=80",
+      "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=1280&q=80",
+    ],
+    roamPlaces: [
+      {
+        name: "Fushimi Inari Torii Gate Trail",
+        image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=900&q=80",
+        description: "Thousands of vermilion torii gates winding up sacred Mount Inari through peaceful cedar forests.",
+      },
+      {
+        name: "Arashiyama Bamboo Forest & River",
+        image: "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?w=900&q=80",
+        description: "Towering green stalks rustling in the breeze, leading down to traditional wooden cormorant boats.",
+      },
+      {
+        name: "Kinkaku-ji (Golden Pavilion)",
+        image: "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=900&q=80",
+        description: "Zen Buddhist temple whose top two floors are entirely gilded in pure gold leaf, reflected in Mirror Pond.",
+      },
+    ],
+    hospitality: [
+      {
+        name: "Hoshinoya Kyoto River Ryokan",
+        image: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=900&q=80",
+        type: "Heritage Riverside Ryokan",
+        description: "Secluded sanctuary reached by a gentle private boat ride up the Oi River in Arashiyama.",
+        rating: 5,
+      },
+      {
+        name: "The Ritz-Carlton Kyoto",
+        image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=900&q=80",
+        type: "Luxury Riverfront Hotel",
+        description: "Contemporary Japanese design along the tranquil Kamogawa riverbanks with private bonsai gardens.",
+        rating: 4.9,
+      },
+    ],
     category: "Culture",
   },
   {
@@ -125,7 +401,47 @@ export const destinations = [
     image: "/images/goa.jpg",
     days: 6,
     from: 1290,
+    rating: 4.94,
+    numReviews: 12,
     highlights: ["Sunset cruise on the Chapora River", "Old Goa heritage & spice plantation", "Quiet southern coves & beach shacks"],
+    gallery: [
+      "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=1280&q=80",
+      "https://images.unsplash.com/photo-1596176530529-78163a4f7af2?w=1280&q=80",
+      "https://images.unsplash.com/photo-1587922546307-776227941871?w=1280&q=80",
+    ],
+    roamPlaces: [
+      {
+        name: "Palolem Crescent Beach",
+        image: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=900&q=80",
+        description: "Shallow, peaceful bay dotted with colorful wooden shacks, swaying coconut palms, and playful dolphins.",
+      },
+      {
+        name: "Fontainhas Latin Heritage Quarter",
+        image: "https://images.unsplash.com/photo-1596176530529-78163a4f7af2?w=900&q=80",
+        description: "Cobblestone alleyways lined with mustard-yellow and indigo Portuguese mansions with ornate balconies.",
+      },
+      {
+        name: "Chapora Fort Ocean Cliff",
+        image: "https://images.unsplash.com/photo-1587922546307-776227941871?w=900&q=80",
+        description: "Red laterite battlements with sweeping panoramic sunset views where the river meets the Arabian Sea.",
+      },
+    ],
+    hospitality: [
+      {
+        name: "Taj Exotica Resort & Spa Benaulim",
+        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=900&q=80",
+        type: "56-Acre Beachfront Haven",
+        description: "Mediterranean-style villas overlooking peaceful white sand beaches of South Goa.",
+        rating: 5,
+      },
+      {
+        name: "Ahilya by the Sea Boutique Villa",
+        image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=900&q=80",
+        type: "Heritage Coastal Haven",
+        description: "Quiet family-run boutique estate nestled in Dolphin Bay with seawater sunrise pools.",
+        rating: 4.9,
+      },
+    ],
     category: "Coast",
   },
   {
@@ -139,7 +455,47 @@ export const destinations = [
     image: "/images/jaipur.jpg",
     days: 5,
     from: 1380,
+    rating: 4.96,
+    numReviews: 16,
     highlights: ["Private sunrise walk at Amer Fort", "Artisan textile & jewelry trails", "Dinner overlooking the illuminated City Palace"],
+    gallery: [
+      "https://images.unsplash.com/photo-1599661046289-e31897846e41?w=1280&q=80",
+      "https://images.unsplash.com/photo-1603288967389-9a6a86c62fb3?w=1280&q=80",
+      "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=1280&q=80",
+    ],
+    roamPlaces: [
+      {
+        name: "Amer Fort & Mirror Palace (Sheesh Mahal)",
+        image: "https://images.unsplash.com/photo-1599661046289-e31897846e41?w=900&q=80",
+        description: "Majestic Rajput fortress overlooking Maota Lake, illuminated by thousands of concave convex mirrors.",
+      },
+      {
+        name: "Hawa Mahal (Palace of Winds)",
+        image: "https://images.unsplash.com/photo-1603288967389-9a6a86c62fb3?w=900&q=80",
+        description: "953 intricately carved pink sandstone jharokhas designed to catch cooling mountain breezes.",
+      },
+      {
+        name: "Jal Mahal (Water Palace)",
+        image: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=900&q=80",
+        description: "Floating architectural gem in the center of serene Man Sagar Lake under the Aravalli hills.",
+      },
+    ],
+    hospitality: [
+      {
+        name: "Rambagh Palace Jaipur",
+        image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=900&q=80",
+        type: "Grand Royal Palace",
+        description: "Former residence of the Maharaja of Jaipur, featuring marble corridors and manicured peacock gardens.",
+        rating: 5,
+      },
+      {
+        name: "The Oberoi Rajvilas",
+        image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=900&q=80",
+        type: "Luxury Royal Villa",
+        description: "Traditional Rajasthani architecture set in 32 acres of gardens with sunken marble baths.",
+        rating: 4.9,
+      },
+    ],
     category: "Culture",
   },
   {
@@ -153,7 +509,47 @@ export const destinations = [
     image: "/images/manali.jpg",
     days: 7,
     from: 1520,
+    rating: 4.95,
+    numReviews: 14,
     highlights: ["Solang Valley & Rohtang high pass", "Riverside trails through Old Manali", "Hot spring baths & orchard walks in Vashisht"],
+    gallery: [
+      "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=1280&q=80",
+      "https://images.unsplash.com/photo-1586500036706-41963de24d8b?w=1280&q=80",
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1280&q=80",
+    ],
+    roamPlaces: [
+      {
+        name: "Solang Valley Snow Glades",
+        image: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=900&q=80",
+        description: "Wide alpine valley surrounded by glaciers and deodar woods, offering paragliding and quiet trails.",
+      },
+      {
+        name: "Rohtang Pass (13,058 ft)",
+        image: "https://images.unsplash.com/photo-1586500036706-41963de24d8b?w=900&q=80",
+        description: "High mountain crest connecting the lush Kullu Valley to the windswept Buddhist plains of Lahaul.",
+      },
+      {
+        name: "Old Manali Cedar Trails",
+        image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=900&q=80",
+        description: "Quiet wooden villages, aromatic apple orchards, and scenic stone footbridges over the river.",
+      },
+    ],
+    hospitality: [
+      {
+        name: "The Himalayan Cedar Castle",
+        image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=900&q=80",
+        type: "Victorian Mountain Lodge",
+        description: "Cast-stone castle overlooking snow-clad peaks, surrounded by apple and cherry orchards.",
+        rating: 5,
+      },
+      {
+        name: "Span Resort & Spa Beas Riverside",
+        image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=900&q=80",
+        type: "Luxury Riverside Retreat",
+        description: "Timber chalets placed directly on the banks of the rushing turquoise Beas River.",
+        rating: 4.8,
+      },
+    ],
     category: "Adventure",
   },
   {
@@ -167,7 +563,47 @@ export const destinations = [
     image: "/images/kerala.jpg",
     days: 8,
     from: 1650,
+    rating: 4.98,
+    numReviews: 20,
     highlights: ["Overnight private houseboat in Alleppey", "Munnar rolling tea plantations", "Kathakali performance & spice garden feast"],
+    gallery: [
+      "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=1280&q=80",
+      "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?w=1280&q=80",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1280&q=80",
+    ],
+    roamPlaces: [
+      {
+        name: "Alleppey Backwater Canals",
+        image: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80",
+        description: "Network of palm-shaded lagoons, quiet canal villages, and water lilies explored by kettle-roofed houseboats.",
+      },
+      {
+        name: "Munnar Rolling Tea Estates",
+        image: "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?w=900&q=80",
+        description: "Contoured emerald slopes bathed in mountain mist, where fresh tea pickers greet the dawn.",
+      },
+      {
+        name: "Varkala Cliffside Ocean",
+        image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=80",
+        description: "Striking red laterite cliffs overlooking the Arabian Sea, famous for healing natural mineral springs.",
+      },
+    ],
+    hospitality: [
+      {
+        name: "Kumarakom Lake Resort",
+        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=900&q=80",
+        type: "Heritage Backwater Sanctuary",
+        description: "Traditional 16th-century Kerala manas reconstructed on the quiet banks of Lake Vembanad.",
+        rating: 5,
+      },
+      {
+        name: "SpiceTree Munnar Eco Sanctuary",
+        image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=900&q=80",
+        type: "Boutique Mountain Chalet",
+        description: "Intimate mountain retreat nestled between the Kannan Devan Hills and Bison Valley.",
+        rating: 4.9,
+      },
+    ],
     category: "Coast",
   },
   {
@@ -181,7 +617,47 @@ export const destinations = [
     image: "/images/udaipur.jpg",
     days: 6,
     from: 1720,
+    rating: 4.97,
+    numReviews: 15,
     highlights: ["Sunset boat ride on Lake Pichola", "Exclusive tour of the City Palace complex", "Rooftop dining with palace reflections"],
+    gallery: [
+      "https://images.unsplash.com/photo-1615836245337-f5b9b2303f10?w=1280&q=80",
+      "https://images.unsplash.com/photo-1599661046289-e31897846e41?w=1280&q=80",
+      "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=1280&q=80",
+    ],
+    roamPlaces: [
+      {
+        name: "Lake Pichola & Jag Mandir",
+        image: "https://images.unsplash.com/photo-1615836245337-f5b9b2303f10?w=900&q=80",
+        description: "Serene boat cruise past marble palace facades, bathing ghats, and royal summer island gardens.",
+      },
+      {
+        name: "City Palace Grand Complex",
+        image: "https://images.unsplash.com/photo-1599661046289-e31897846e41?w=900&q=80",
+        description: "Rajasthan's largest palace complex, a fusion of Rajasthani and Mughal architectural mastery.",
+      },
+      {
+        name: "Saheliyon-ki-Bari (Courtyard of Maidens)",
+        image: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=900&q=80",
+        description: "Landscaped royal garden with lotus pools, marble elephant fountains, and fragrant flower pavilions.",
+      },
+    ],
+    hospitality: [
+      {
+        name: "Taj Lake Palace Floating Marvel",
+        image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=900&q=80",
+        type: "Floating Island Palace",
+        description: "18th-century marble palace that seems to float miraculously upon the waters of Lake Pichola.",
+        rating: 5,
+      },
+      {
+        name: "The Leela Palace Udaipur",
+        image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=900&q=80",
+        type: "Royal Lakeside Sanctuary",
+        description: "Opulent lakefront suites with traditional Mewari art, private plunge pools, and boat arrival.",
+        rating: 4.9,
+      },
+    ],
     category: "Culture",
   },
   {
@@ -195,7 +671,47 @@ export const destinations = [
     image: "/images/varanasi.jpg",
     days: 5,
     from: 1180,
+    rating: 4.93,
+    numReviews: 18,
     highlights: ["Sunrise wooden boat ride on the holy Ganges", "Evening Ganga Aarti ceremony at Dashashwamedh", "Old city maze of silk weavers & sweet shops"],
+    gallery: [
+      "https://images.unsplash.com/photo-1561361513-2d000a50f0dc?w=1280&q=80",
+      "https://images.unsplash.com/photo-1561359313-0639aad49ca6?w=1280&q=80",
+      "https://images.unsplash.com/photo-1548013146-72479768bada?w=1280&q=80",
+    ],
+    roamPlaces: [
+      {
+        name: "Dashashwamedh & Assi Ghats",
+        image: "https://images.unsplash.com/photo-1561361513-2d000a50f0dc?w=900&q=80",
+        description: "Monumental stone stairways where spiritual life, yoga, morning prayers, and evening brass aartis unfold.",
+      },
+      {
+        name: "Ganges River Dawn Passage",
+        image: "https://images.unsplash.com/photo-1561359313-0639aad49ca6?w=900&q=80",
+        description: "Row through the morning river fog as thousands of floating clay lamps illuminate golden sunrise waters.",
+      },
+      {
+        name: "Sarnath Deer Park & Dhamek Stupa",
+        image: "https://images.unsplash.com/photo-1548013146-72479768bada?w=900&q=80",
+        description: "Peaceful parkland where Lord Buddha delivered his first sermon, anchored by a massive 5th-century stupa.",
+      },
+    ],
+    hospitality: [
+      {
+        name: "BrijRama Palace Heritage Ghat Hotel",
+        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=900&q=80",
+        type: "18th-Century Riverfront Palace",
+        description: "One of the oldest structures on Varanasi's ghats, restored with elevator access and classical music recitals.",
+        rating: 5,
+      },
+      {
+        name: "Taj Ganges Varanasi",
+        image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=900&q=80",
+        type: "Lush Garden Estate",
+        description: "Spacious 12-acre lush green estate situated in the peaceful cantonment area with serene pools.",
+        rating: 4.8,
+      },
+    ],
     category: "Culture",
   },
   {
@@ -209,7 +725,47 @@ export const destinations = [
     image: "/images/darjeeling.jpg",
     days: 6,
     from: 1420,
+    rating: 4.96,
+    numReviews: 13,
     highlights: ["Sunrise over Kanchenjunga from Tiger Hill", "Heritage Darjeeling Himalayan Railway toy train", "Private tea tasting at an estate bungalow"],
+    gallery: [
+      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1280&q=80",
+      "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?w=1280&q=80",
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1280&q=80",
+    ],
+    roamPlaces: [
+      {
+        name: "Tiger Hill (8,482 ft) Dawn Vista",
+        image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=900&q=80",
+        description: "Watch the sun ignite Mount Kanchenjunga and Mount Everest in shades of rose gold before reaching the valley.",
+      },
+      {
+        name: "Glenburn & Happy Valley Tea Trails",
+        image: "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?w=900&q=80",
+        description: "Hike through vintage tea bushes dating back to 1854, followed by private factory cupping sessions.",
+      },
+      {
+        name: "Batasia Loop & Himalayan Toy Train",
+        image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=900&q=80",
+        description: "UNESCO World Heritage narrow-gauge steam locomotive spiraling through alpine floral gardens.",
+      },
+    ],
+    hospitality: [
+      {
+        name: "Glenburn Tea Estate Planter's Bungalow",
+        image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=900&q=80",
+        type: "Heritage Plantation Estate",
+        description: "Boutique colonial estate set across 1,600 acres of forest and tea with uninterrupted Kanchenjunga views.",
+        rating: 5,
+      },
+      {
+        name: "The Elgin Darjeeling Colonial Haven",
+        image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=900&q=80",
+        type: "Royal Heritage Summer Residence",
+        description: "125-year-old British colonial residence with crackling open fires, oak paneling, and afternoon high tea.",
+        rating: 4.8,
+      },
+    ],
     category: "Adventure",
   },
 ];

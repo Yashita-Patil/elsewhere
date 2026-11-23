@@ -110,6 +110,7 @@ async function seed() {
   console.log(`Admin login: ${adminEmail} / ${adminPassword}`);
   console.log("Demo login:  demo@elsewhere.com / Demo@123");
   await mongoose.disconnect();
+  process.exit(0);
 }
 
 seed().catch((error) => {

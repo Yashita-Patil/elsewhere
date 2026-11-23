@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, ArrowRight, ArrowUpRight, Check, Eye, Heart, MapPin, Star } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, Camera, Check, Compass, Eye, Heart, Hotel, MapPin, Star } from "lucide-react";
 import Button from "../components/ui/Button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "../components/ui/Dialog";
 import BookingDialog from "../components/BookingDialog";
@@ -81,17 +81,27 @@ export default function DestinationDetail() {
   return (
     <main className="destination-page">
       <header className="detail-topbar">
-        <div style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
-          <Link to="/" className="wordmark" aria-label="Elsewhere home">elsewhere<span>.</span></Link>
-          <Link to="/" className="detail-back"><ArrowLeft aria-hidden="true" /> All destinations</Link>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+        <Link to="/" className="wordmark" aria-label="Elsewhere home">
+          elsewhere<span>.</span>
+        </Link>
+        <div className="detail-topbar-right">
           <CurrencySelector />
           <Button asChild className="header-plan">
-            <Link to="/#packages">Find your journey <ArrowUpRight aria-hidden="true" /></Link>
+            <Link to="/#packages">
+              Find your journey <ArrowUpRight aria-hidden="true" />
+            </Link>
           </Button>
         </div>
       </header>
+
+      {/* Navigation below navbar */}
+      <div className="detail-subnav-bar">
+        <div className="page-wrap">
+          <Link to="/#destinations" className="detail-back-link">
+            <ArrowLeft aria-hidden="true" /> All destinations
+          </Link>
+        </div>
+      </div>
 
       <section className="detail-cover" aria-label={`${destination.name}, ${destination.country}`}>
         <img src={destination.image} alt={`${destination.name}, ${destination.country}`} fetchPriority="high" width={1920} height={1200} />
@@ -127,11 +137,88 @@ export default function DestinationDetail() {
         </aside>
       </section>
 
+      {/* Curated Destination Gallery */}
       <section className="detail-gallery page-wrap">
-        <img src={destination.image} alt={`${destination.name} landscape`} loading="lazy" width={1280} height={960} />
-        <div><span>01 / A SENSE OF PLACE</span><p>Leave room for the moments you didn’t plan.</p></div>
-        <img src={destination.image} alt={`${destination.name}, a closer look`} loading="lazy" width={1280} height={960} />
+        <img
+          src={destination.gallery?.[0] || destination.image}
+          alt={`${destination.name} landscape`}
+          loading="lazy"
+          width={1280}
+          height={960}
+        />
+        <div>
+          <span>01 / A SENSE OF PLACE</span>
+          <p>Leave room for the moments you didn’t plan.</p>
+        </div>
+        <img
+          src={destination.gallery?.[1] || destination.gallery?.[0] || destination.image}
+          alt={`${destination.name}, a closer look`}
+          loading="lazy"
+          width={1280}
+          height={960}
+        />
       </section>
+
+      {/* Places You'll Roam */}
+      {destination.roamPlaces && destination.roamPlaces.length > 0 && (
+        <section className="detail-roam-section page-wrap">
+          <div className="section-head-split">
+            <div>
+              <p className="eyebrow"><Compass size={14} aria-hidden="true" /> Places to roam</p>
+              <h2>Iconic sights & <em>hidden trails.</em></h2>
+            </div>
+            <span className="section-count-tag">{destination.roamPlaces.length} iconic places to roam</span>
+          </div>
+
+          <div className="roam-cards-grid">
+            {destination.roamPlaces.map((place, idx) => (
+              <div className="roam-place-card" key={idx}>
+                <div className="roam-card-img-wrap">
+                  <img src={place.image} alt={place.name} loading="lazy" />
+                  <span className="roam-step-num">0{idx + 1}</span>
+                </div>
+                <div className="roam-card-info">
+                  <h3>{place.name}</h3>
+                  <p>{place.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Hospitality & Stays */}
+      {destination.hospitality && destination.hospitality.length > 0 && (
+        <section className="detail-hospitality-section page-wrap">
+          <div className="section-head-split">
+            <div>
+              <p className="eyebrow"><Hotel size={14} aria-hidden="true" /> Hospitality & stays</p>
+              <h2>Spaces made for <em>quiet rest.</em></h2>
+            </div>
+            <span className="section-count-tag">Handpicked boutique & luxury sanctuaries</span>
+          </div>
+
+          <div className="hospitality-cards-grid">
+            {destination.hospitality.map((stay, idx) => (
+              <div className="hospitality-card" key={idx}>
+                <div className="hospitality-card-img-wrap">
+                  <img src={stay.image} alt={stay.name} loading="lazy" />
+                  <span className="hospitality-type-badge">{stay.type || "Luxury Stay"}</span>
+                </div>
+                <div className="hospitality-card-info">
+                  <div className="hospitality-card-meta">
+                    <span className="hospitality-rating">
+                      <Star fill="currentColor" size={13} aria-hidden="true" /> {Number(stay.rating || 5).toFixed(1)}
+                    </span>
+                  </div>
+                  <h3>{stay.name}</h3>
+                  <p>{stay.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="detail-packages">
         <div className="page-wrap">
