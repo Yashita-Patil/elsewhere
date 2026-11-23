@@ -176,23 +176,3 @@ You can try the public ones directly in the browser, e.g. http://localhost:5000/
 
 ---
 
-## 7. What changed compared with the original (Lovable) project
-
-- **Removed** the Lovable/TanStack Start setup, the error-reporting files, `bun.lock`, AI-tool files and **40+ unused UI component files**. Only the three components that are actually used are kept (`Button`, `Input`, `Dialog`).
-- **Same UI:** the stylesheet and page markup are kept, so the website looks the same. Small additions: a password field in the login popup, a "Sort" dropdown for journeys, and the admin pages.
-- **Added a real backend** (Express + MongoDB) instead of hard-coded data and `localStorage`.
-- **Added real authentication** (register, login, hashed passwords, JWT) and an **admin role**.
-- **Simplified the frontend:** one huge file (`index.tsx`, ~500 lines on one page) was split into small components, and the duplicated booking/saved-places code now lives in shared contexts.
-- Converted from TypeScript to plain JavaScript (JSX) to keep the code easy to read and explain.
-- Booking prices are now calculated on the **server**, so they can't be changed from the browser.
-
----
-
-## 8. Ideas to extend it further (good for extra marks)
-
-- Reviews and ratings for each destination
-- Image upload for the admin (with `multer`)
-- Payment demo (Razorpay test mode) and a confirmation email (Nodemailer)
-- Currency switcher (USD / INR)
-- Pagination, wishlist page, forgot-password flow
-- Deploy: backend on Render, database on MongoDB Atlas, frontend on Vercel / Netlify
