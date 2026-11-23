@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "./ui/Dialog";
 import Button from "./ui/Button";
 import Input from "./ui/Input";
@@ -23,6 +23,8 @@ export default function BookingDialog({
   const [travelers, setTravelers] = useState(defaultTravelers);
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
+  const [step, setStep] = useState(1);
+  const [createdBooking, setCreatedBooking] = useState(null);
 
   // every time a new package is opened, reset the form
   useEffect(() => {
@@ -30,6 +32,8 @@ export default function BookingDialog({
       setDate(defaultDate);
       setTravelers(defaultTravelers);
       setError("");
+      setStep(1);
+      setCreatedBooking(null);
     }
   }, [item]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -44,7 +48,8 @@ export default function BookingDialog({
         travelDate: date,
         travelers,
       });
-      onBooked(booking);
+      setCreatedBooking(booking);
+      setStep(2);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -60,14 +65,27 @@ export default function BookingDialog({
             <span className="eyebrow-line" />
             Your next chapter
           </p>
-          <DialogTitle>{item?.title ?? "Your journey"}</DialogTitle>
+          <DialogTitle>{step === 2 ? "Enquiry Confirmed" : (item?.title ?? "Your journey")}</DialogTitle>
           <DialogDescription>
             {item?.location} · from {item ? formatPrice(item.price) : ""} per person
           </DialogDescription>
         </DialogHeader>
 
-        {item && (
-          <>
+        {/* Animated Booking Progress Indicator */}
+        <div className="booking-progress-track" aria-label="Booking steps">
+          <div className={`booking-step ${step >= 1 ? "is-active" : ""} ${step > 1 ? "is-done" : ""}`}>
+            <span className="step-num">{step > 1 ? <Check className="w-3.5 h-3.5" /> : "1"}</span>
+            <span className="step-name">Details</span>
+          </div>
+          <div className={`booking-progress-connector ${step >= 2 ? "is-filled" : ""}`} />
+          <div className={`booking-step ${step >= 2 ? "is-active is-done" : ""}`}>
+            <span className="step-num">2</span>
+            <span className="step-name">Confirmed</span>
+          </div>
+        </div>
+
+        {item && step === 1 && (
+          <div className="booking-step-content step-fade-in">
             {showPreview && (
               <>
                 <img
@@ -117,7 +135,41 @@ export default function BookingDialog({
                 {saving ? "Saving…" : "Save my enquiry"} <ArrowRight aria-hidden="true" />
               </Button>
             </form>
-          </>
+          </div>
+        )}
+
+        {item && step === 2 && (
+          <div className="booking-success-container step-fade-in">
+            <div className="success-pulse-rings">
+              <div className="pulse-ring ring-1" />
+              <div className="pulse-ring ring-2" />
+              <div className="success-icon-disc">
+                <Check className="success-check-icon" />
+              </div>
+            </div>
+            <h3 className="success-title">Your journey is noted.</h3>
+            <p className="success-subtitle">
+              We’ve reserved your provisional dates for <em>{item.location}</em> for {travelers}{" "}
+              {travelers === 1 ? "traveler" : "travelers"}.
+            </p>
+            <div className="success-details-card">
+              <div>
+                <span>Selected departure</span>
+                <strong>{date}</strong>
+              </div>
+              <div>
+                <span>Estimated journey total</span>
+                <strong>{formatPrice(item.price * travelers)}</strong>
+              </div>
+            </div>
+            <Button
+              type="button"
+              className="dialog-submit success-action-btn"
+              onClick={() => onBooked(createdBooking)}
+            >
+              View in My Trips <ArrowRight aria-hidden="true" />
+            </Button>
+          </div>
         )}
       </DialogContent>
     </Dialog>

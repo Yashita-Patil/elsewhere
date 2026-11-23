@@ -1,4 +1,4 @@
-@import "tailwindcss" source(none);
+@import "tailwindcss";
 @source "./";
 @import "tw-animate-css";
 
@@ -131,9 +131,19 @@ img {
   align-items: center;
   gap: 20px;
   padding: 0 max(48px, calc((100vw - 1240px) / 2));
-  background: color-mix(in oklab, var(--background) 95%, transparent);
+  background: color-mix(in oklab, var(--background) 92%, transparent);
   border-bottom: 1px solid color-mix(in oklab, var(--border) 65%, transparent);
   backdrop-filter: blur(14px);
+  transition: background 350ms cubic-bezier(.2,.7,.2,1),
+              box-shadow 350ms cubic-bezier(.2,.7,.2,1),
+              border-color 350ms cubic-bezier(.2,.7,.2,1),
+              height 350ms cubic-bezier(.2,.7,.2,1);
+}
+
+.site-header.is-scrolled {
+  background: color-mix(in oklab, var(--background) 98%, transparent);
+  box-shadow: 0 4px 24px oklch(0.12 0.02 45 / 0.08);
+  border-bottom-color: var(--border);
 }
 
 .wordmark {
@@ -243,8 +253,26 @@ img {
   max-height: 850px;
   display: flex;
   align-items: flex-start;
-  background: url("/images/amalfi-coast.jpg") 50% 54% / cover no-repeat;
+  overflow: hidden;
   color: var(--primary-foreground);
+}
+
+.hero-bg {
+  position: absolute;
+  inset: -28px;
+  z-index: -2;
+  background: url("/images/amalfi-coast.jpg") 50% 54% / cover no-repeat;
+  animation: heroCinematicZoom 28s cubic-bezier(0.25, 1, 0.5, 1) infinite alternate;
+  will-change: transform;
+}
+
+@keyframes heroCinematicZoom {
+  0% {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: scale(1.08) translate3d(0, -12px, 0);
+  }
 }
 
 .hero::before {
@@ -286,6 +314,7 @@ img {
 .hero-eyebrow {
   margin-bottom: 24px;
   color: var(--primary-foreground);
+  animation: fadeInUp 0.7s cubic-bezier(.2,.7,.2,1) 0.08s both;
 }
 
 .hero h1 {
@@ -296,6 +325,7 @@ img {
   line-height: .86;
   font-weight: 400;
   letter-spacing: 0;
+  animation: fadeInUp 0.85s cubic-bezier(.2,.7,.2,1) 0.18s both;
 }
 
 .hero h1 em {
@@ -307,6 +337,7 @@ img {
   color: oklch(0.99 0.01 84 / 90%);
   font-size: 15px;
   line-height: 1.7;
+  animation: fadeInUp 0.85s cubic-bezier(.2,.7,.2,1) 0.28s both;
 }
 
 .hero-discover {
@@ -314,6 +345,7 @@ img {
   align-items: center;
   gap: 15px;
   font-size: 11px;
+  animation: fadeInUp 0.85s cubic-bezier(.2,.7,.2,1) 0.38s both;
 }
 
 .hero-discover span {
@@ -359,7 +391,7 @@ img {
   position: absolute;
   left: 50%;
   bottom: -1px;
-  transform: translate(-50%, 0);
+  transform: translate(-50%, 0) !important;
   display: grid;
   grid-template-columns: minmax(260px, 1.65fr) minmax(190px, 1fr) minmax(190px, 1fr) 62px;
   min-height: 92px;
@@ -368,6 +400,7 @@ img {
   background: var(--background);
   color: var(--foreground);
   box-shadow: 0 14px 48px oklch(0.18 0.03 45 / 13%);
+  z-index: 10;
 }
 
 .search-field {
@@ -404,32 +437,37 @@ img {
   width: 100%;
   height: 24px;
   min-width: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  outline: 0;
-  background: transparent;
-  color: var(--foreground);
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: 0 !important;
+  background: transparent !important;
+  color: var(--foreground) !important;
   font-size: 11px;
-  box-shadow: none;
+  box-shadow: none !important;
 }
 
 .search-input-wrap input:focus-visible,
 .search-input-wrap select:focus-visible {
-  outline: 0;
-  box-shadow: none;
+  outline: 0 !important;
+  box-shadow: none !important;
 }
 
 .search-input-wrap input::placeholder {
   color: var(--muted-foreground);
+  font-size: 11px;
 }
 
 .search-input-wrap input::-webkit-calendar-picker-indicator {
-  opacity: .65;
+  display: none !important;
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
 .search-input-wrap select {
   appearance: none;
+  cursor: pointer;
 }
 
 .select-chevron {
@@ -445,10 +483,14 @@ img {
   border-radius: 0;
   background: var(--rust);
   color: var(--primary-foreground);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .search-submit svg {
   width: 19px;
+  height: 19px;
 }
 
 .intro-strip {
@@ -607,38 +649,91 @@ img {
   box-shadow: none;
 }
 
+/* ============================================================
+   DESTINATION MASONRY GRID — Pinterest-style columns layout
+   ============================================================ */
 .destination-grid {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 32px 22px;
+  columns: 3;
+  column-gap: 22px;
+  /* Reset any previous grid */
+  display: block;
 }
 
+/* Each card is a masonry item — break-inside: avoid keeps it intact */
 .destination-card {
-  grid-column: span 4;
-  min-width: 0;
+  display: inline-block; /* required for CSS columns masonry */
+  width: 100%;
+  vertical-align: top;
+  margin-bottom: 22px;
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--card);
+  box-shadow: 0 2px 12px oklch(0.12 0.02 45 / 0.07);
+  transition: transform 400ms cubic-bezier(.2,.7,.2,1),
+              box-shadow 400ms cubic-bezier(.2,.7,.2,1);
+  /* viewport-fade: start hidden, become visible via JS class */
+  opacity: 0;
+  transform: translateY(20px);
 }
 
-.destination-card:nth-child(4n + 1),
-.destination-card:nth-child(4n + 4) {
-  grid-column: span 5;
+/* Card revealed by IntersectionObserver */
+.destination-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.65s cubic-bezier(.2,.7,.2,1),
+              transform 0.65s cubic-bezier(.2,.7,.2,1),
+              box-shadow 400ms cubic-bezier(.2,.7,.2,1);
 }
 
-.destination-card:nth-child(4n + 2),
-.destination-card:nth-child(4n + 3) {
-  grid-column: span 3.5;
+.destination-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 48px oklch(0.12 0.02 45 / 0.16);
 }
 
+.destination-gradient-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 42%,
+    oklch(0.12 0.02 45 / 0.25) 75%,
+    oklch(0.12 0.02 45 / 0.65) 100%
+  );
+  opacity: 0;
+  transition: opacity 450ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.destination-card:hover .destination-gradient-overlay {
+  opacity: 1;
+}
+
+/* ---- Varied image heights — masonry rhythm via aspect-ratio cycling ---- */
+/* Cycle of 6 gives a natural, uneven column rhythm */
 .destination-photo {
   position: relative;
-  aspect-ratio: 1.32;
   overflow: hidden;
   background: var(--paper-deep);
+  /* default: square-ish */
+  aspect-ratio: 1 / 1;
+  border-radius: 0; /* card has border-radius, photo fills to edge */
 }
 
-.destination-card:nth-child(4n + 2) .destination-photo,
-.destination-card:nth-child(4n + 3) .destination-photo {
-  aspect-ratio: 1.05;
-}
+/* 1st of every 6: tall portrait — dominant anchor */
+.destination-card:nth-child(6n + 1) .destination-photo { aspect-ratio: 3 / 4; }
+/* 2nd: wide landscape */
+.destination-card:nth-child(6n + 2) .destination-photo { aspect-ratio: 4 / 3; }
+/* 3rd: square */
+.destination-card:nth-child(6n + 3) .destination-photo { aspect-ratio: 1 / 1; }
+/* 4th: very tall portrait */
+.destination-card:nth-child(6n + 4) .destination-photo { aspect-ratio: 2 / 3; }
+/* 5th: widescreen landscape */
+.destination-card:nth-child(6n + 5) .destination-photo { aspect-ratio: 16 / 9; }
+/* 6th: standard 4:5 portrait */
+.destination-card:nth-child(6n + 6) .destination-photo { aspect-ratio: 4 / 5; }
 
 .destination-photo img,
 .experience-card img,
@@ -647,12 +742,13 @@ img {
   height: 100%;
   object-fit: cover;
   transition: transform 700ms cubic-bezier(.2, .7, .2, 1);
+  display: block;
 }
 
 .destination-card:hover .destination-photo img,
 .experience-card:hover img,
 .package-card:hover .package-photo img {
-  transform: scale(1.04);
+  transform: scale(1.07);
 }
 
 .photo-index {
@@ -689,7 +785,7 @@ img {
 }
 
 .destination-info {
-  padding: 16px 1px 0;
+  padding: 16px 16px 18px;
 }
 
 .destination-title-line {
@@ -973,7 +1069,35 @@ img {
 
 .package-card {
   min-width: 0;
-  background: var(--background);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 380ms cubic-bezier(.2,.7,.2,1),
+              box-shadow 380ms cubic-bezier(.2,.7,.2,1),
+              border-color 380ms cubic-bezier(.2,.7,.2,1);
+  position: relative;
+}
+
+.package-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 18px 40px oklch(0.12 0.02 45 / 0.12);
+  border-color: var(--rust);
+}
+
+.package-card.is-selected {
+  border-color: var(--rust);
+  box-shadow: 0 0 0 2px var(--rust), 0 12px 32px oklch(0.12 0.02 45 / 0.14);
+  animation: pulseSelectedBorder 2s ease-in-out infinite;
+}
+
+@keyframes pulseSelectedBorder {
+  0%, 100% {
+    box-shadow: 0 0 0 2px var(--rust), 0 12px 32px oklch(0.12 0.02 45 / 0.14);
+  }
+  50% {
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--rust) 40%, transparent), 0 16px 36px oklch(0.12 0.02 45 / 0.18);
+  }
 }
 
 .package-photo {
@@ -1042,11 +1166,19 @@ img {
   border-top: 1px solid var(--border);
   color: var(--muted-foreground);
   font-size: 10px;
+  transition: color 250ms ease, border-color 250ms ease;
 }
 
 .package-meta strong {
   color: var(--foreground);
   font-weight: 600;
+  transition: color 250ms ease, transform 250ms ease;
+  display: inline-block;
+}
+
+.package-card:hover .package-meta strong {
+  color: var(--rust);
+  transform: scale(1.05);
 }
 
 .package-meta small {
@@ -1310,6 +1442,108 @@ img {
   color: var(--muted-foreground);
   font-size: 7px;
   letter-spacing: .08em;
+}
+
+/* Stories Slideshow / Postcards from Elsewhere */
+.stories-carousel-wrapper {
+  position: relative;
+  min-width: 0;
+  width: 100%;
+}
+
+.stories-slides-viewport {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.stories-slides-track {
+  display: flex;
+  width: 100%;
+  transition: transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.stories-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+.stories-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 28px;
+  padding-left: 38px;
+  gap: 20px;
+}
+
+.stories-dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stories-dot {
+  width: 24px;
+  height: 3px;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  background: var(--border);
+  cursor: pointer;
+  transition: all 300ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.stories-dot:hover {
+  background: var(--muted-foreground);
+}
+
+.stories-dot.is-active {
+  width: 44px;
+  background: var(--rust);
+}
+
+.stories-arrows {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.stories-arrow-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--foreground);
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+
+.stories-arrow-btn:hover {
+  border-color: var(--rust);
+  color: var(--rust);
+  background: color-mix(in oklab, var(--rust) 8%, transparent);
+}
+
+.stories-arrow-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.stories-counter {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--muted-foreground);
+  min-width: 48px;
+  text-align: center;
 }
 
 .closing-banner {
@@ -2507,26 +2741,27 @@ img {
   }
 
   .destination-grid {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: 28px 16px;
+    columns: 2;
+    column-gap: 16px;
   }
 
+  /* On tablet: reset all nth-child column-span overrides (not needed for CSS columns) */
   .destination-card,
-  .destination-card:nth-child(4n + 1),
-  .destination-card:nth-child(4n + 4) {
-    grid-column: span 3;
+  .destination-card:nth-child(3n + 1),
+  .destination-card:nth-child(3n + 2),
+  .destination-card:nth-child(3n + 3) {
+    /* columns layout ignores grid-column, so just reset */
+    grid-column: unset;
   }
 
-  .destination-card:nth-child(4n + 2),
-  .destination-card:nth-child(4n + 3) {
-    grid-column: span 3;
-  }
-
+  /* Tablet: slightly adjusted aspect ratios for 2-col layout */
   .destination-photo,
-  .destination-card:nth-child(4n + 2) .destination-photo,
-  .destination-card:nth-child(4n + 3) .destination-photo {
-    aspect-ratio: 1.2;
-  }
+  .destination-card:nth-child(6n + 1) .destination-photo { aspect-ratio: 3 / 4; }
+  .destination-card:nth-child(6n + 2) .destination-photo { aspect-ratio: 4 / 3; }
+  .destination-card:nth-child(6n + 3) .destination-photo { aspect-ratio: 1 / 1; }
+  .destination-card:nth-child(6n + 4) .destination-photo { aspect-ratio: 2 / 3; }
+  .destination-card:nth-child(6n + 5) .destination-photo { aspect-ratio: 16 / 9; }
+  .destination-card:nth-child(6n + 6) .destination-photo { aspect-ratio: 4 / 5; }
 
   .experience-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -2713,14 +2948,19 @@ img {
   .search-bar {
     bottom: -28px;
     grid-template-columns: 1fr 48px;
-    width: calc(100% - 40px);
-    min-height: 105px;
-    padding: 8px;
-    box-shadow: 0 12px 32px oklch(0.18 0.03 45 / 12%);
+    width: calc(100% - 32px);
+    min-height: 110px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    box-shadow: 0 12px 36px oklch(0.18 0.03 45 / 15%);
   }
 
   .search-field {
     padding: 8px 10px;
+  }
+
+  .search-field>span:first-child {
+    font-size: 10px;
   }
 
   .search-location {
@@ -2731,21 +2971,25 @@ img {
     grid-column: 1;
     grid-row: 2;
     border-top: 1px solid var(--border);
+    border-right: 0;
   }
 
   .search-input-wrap {
-    gap: 6px;
+    gap: 8px;
   }
 
-  .search-input-wrap input {
-    font-size: 10px;
+  .search-input-wrap input,
+  .search-input-wrap select {
+    font-size: 13px;
+    height: 26px;
   }
 
   .search-submit {
     grid-column: 2;
     grid-row: 1 / 3;
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
+    border-radius: 6px;
   }
 
   .intro-strip {
@@ -2817,23 +3061,30 @@ img {
   }
 
   .destination-grid {
-    grid-template-columns: 1fr;
-    gap: 24px;
+    columns: 2;
+    column-gap: 12px;
   }
 
   .destination-card,
-  .destination-card:nth-child(4n + 1),
-  .destination-card:nth-child(4n + 4),
-  .destination-card:nth-child(4n + 2),
-  .destination-card:nth-child(4n + 3) {
-    grid-column: auto;
+  .destination-card:nth-child(3n + 1),
+  .destination-card:nth-child(3n + 2),
+  .destination-card:nth-child(3n + 3) {
+    grid-column: unset;
   }
 
-  .destination-photo,
-  .destination-card:nth-child(4n + 2) .destination-photo,
-  .destination-card:nth-child(4n + 3) .destination-photo {
-    aspect-ratio: 1.24;
+  /* Mobile: smaller margin between cards */
+  .destination-card {
+    margin-bottom: 12px;
   }
+
+  /* Mobile: simpler aspect-ratio rhythm */
+  .destination-photo,
+  .destination-card:nth-child(6n + 1) .destination-photo { aspect-ratio: 3 / 4; }
+  .destination-card:nth-child(6n + 2) .destination-photo { aspect-ratio: 1 / 1; }
+  .destination-card:nth-child(6n + 3) .destination-photo { aspect-ratio: 4 / 5; }
+  .destination-card:nth-child(6n + 4) .destination-photo { aspect-ratio: 3 / 4; }
+  .destination-card:nth-child(6n + 5) .destination-photo { aspect-ratio: 1 / 1; }
+  .destination-card:nth-child(6n + 6) .destination-photo { aspect-ratio: 4 / 5; }
 
   .destination-info h3 {
     font-size: 23px;
@@ -3008,6 +3259,19 @@ img {
 
   .quote-footer {
     align-items: flex-start;
+  }
+
+  .stories-controls {
+    padding-left: 20px;
+    gap: 12px;
+  }
+
+  .stories-dot {
+    width: 18px;
+  }
+
+  .stories-dot.is-active {
+    width: 32px;
   }
 
   .closing-banner {
@@ -4137,8 +4401,8 @@ img {
   font-weight: 600;
   cursor: pointer;
   letter-spacing: 0.03em;
-  transition: border-color 150ms ease;
-  background:150ms ease;
+  transition: border-color 150ms ease, background 150ms ease;
+  appearance: auto;
 }
 
 .currency-select-input:hover {
@@ -5988,6 +6252,531 @@ img {
   border-color: color-mix(in oklab, var(--destructive) 30%, transparent);
   color: var(--destructive);
 }
+
+/* ============================================================
+   ANIMATIONS — Entrance & hover animations for Elsewhere
+   ============================================================ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Destination cards — viewport reveal */
+.destination-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Section headings — fade in from left */
+.section-heading {
+  animation: fadeInLeft 0.6s cubic-bezier(.2,.7,.2,1) both;
+}
+
+/* Experience cards — scale up on load */
+.experience-card {
+  animation: scaleUp 0.5s cubic-bezier(.2,.7,.2,1) both;
+}
+.experience-card:nth-child(1) { animation-delay: 0.05s; }
+.experience-card:nth-child(2) { animation-delay: 0.13s; }
+.experience-card:nth-child(3) { animation-delay: 0.21s; }
+.experience-card:nth-child(4) { animation-delay: 0.29s; }
+
+/* Package cards — fade in up */
+.package-card {
+  animation: fadeInUp 0.5s cubic-bezier(.2,.7,.2,1) both;
+}
+.package-card:nth-child(1) { animation-delay: 0.05s; }
+.package-card:nth-child(2) { animation-delay: 0.12s; }
+.package-card:nth-child(3) { animation-delay: 0.19s; }
+.package-card:nth-child(4) { animation-delay: 0.26s; }
+.package-card:nth-child(n+5) { animation-delay: 0.33s; }
+
+/* Hero text entrance */
+.hero-text {
+  animation: fadeInUp 0.75s cubic-bezier(.2,.7,.2,1) 0.1s both;
+}
+
+/* Approach feature items */
+.approach-feature {
+  animation: fadeInUp 0.5s cubic-bezier(.2,.7,.2,1) both;
+}
+.approach-feature:nth-child(1) { animation-delay: 0.05s; }
+.approach-feature:nth-child(2) { animation-delay: 0.15s; }
+.approach-feature:nth-child(3) { animation-delay: 0.25s; }
+
+/* Footer fade in */
+.site-footer {
+  animation: fadeIn 0.6s ease 0.1s both;
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .destination-card,
+  .destination-card.is-visible,
+  .experience-card,
+  .package-card,
+  .section-heading,
+  .hero-text,
+  .approach-feature,
+  .site-footer,
+  .stories-slides-track,
+  .hero-bg,
+  .back-to-top-btn,
+  .pulse-ring,
+  .stat-card {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ============================================================
+   PREMIUM SMOOTH ANIMATIONS & MICRO-INTERACTIONS
+   ============================================================ */
+
+/* Page Fade-In */
+main,
+.account-page,
+.admin-page,
+.destination-detail-page {
+  animation: pageFadeIn 400ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Booking Progress Indicator */
+.booking-progress-track {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 14px 0 22px;
+  padding: 0 4px;
+  position: relative;
+}
+
+.booking-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--muted-foreground);
+  transition: color 300ms ease;
+  z-index: 2;
+}
+
+.booking-step.is-active {
+  color: var(--foreground);
+}
+
+.step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--card);
+  font-size: 10px;
+  transition: all 300ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.booking-step.is-active .step-num,
+.booking-step.is-done .step-num {
+  border-color: var(--rust);
+  background: var(--rust);
+  color: var(--primary-foreground);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--rust) 25%, transparent);
+}
+
+.booking-progress-connector {
+  flex: 1;
+  height: 2px;
+  background: var(--border);
+  margin: 0 12px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.booking-progress-connector::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: var(--rust);
+  transition: width 450ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.booking-progress-connector.is-filled::after {
+  width: 100%;
+}
+
+.step-fade-in {
+  animation: stepFadeIn 380ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes stepFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Elegant Booking Success Animation */
+.booking-success-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 16px 0 6px;
+}
+
+.success-pulse-rings {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.pulse-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--rust);
+  opacity: 0;
+  animation: successPulse 2.4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+.pulse-ring.ring-2 {
+  animation-delay: 0.7s;
+}
+
+@keyframes successPulse {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+.success-icon-disc {
+  position: relative;
+  z-index: 2;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--rust);
+  color: var(--primary-foreground);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px color-mix(in oklab, var(--rust) 40%, transparent);
+  animation: discPop 500ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes discPop {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.success-check-icon {
+  width: 26px;
+  height: 26px;
+  stroke-width: 2.5;
+}
+
+.success-title {
+  margin: 0 0 6px;
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.success-subtitle {
+  max-width: 360px;
+  margin: 0 0 18px;
+  color: var(--muted-foreground);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.success-details-card {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--paper);
+  border-radius: 6px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.success-details-card div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.success-details-card span {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted-foreground);
+}
+
+.success-details-card strong {
+  font-size: 12px;
+  color: var(--foreground);
+}
+
+.success-action-btn {
+  width: 100%;
+}
+
+/* Dashboard Statistics Cards Staggered Entrance */
+.account-stats-grid .stat-card {
+  animation: statCardEntrance 450ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  transition: transform 300ms cubic-bezier(0.2, 0.7, 0.2, 1),
+              box-shadow 300ms cubic-bezier(0.2, 0.7, 0.2, 1),
+              border-color 300ms ease;
+}
+
+.account-stats-grid .stat-card:nth-child(1) { animation-delay: 0.04s; }
+.account-stats-grid .stat-card:nth-child(2) { animation-delay: 0.10s; }
+.account-stats-grid .stat-card:nth-child(3) { animation-delay: 0.16s; }
+.account-stats-grid .stat-card:nth-child(4) { animation-delay: 0.22s; }
+
+.account-stats-grid .stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px oklch(0.12 0.02 45 / 0.10);
+  border-color: color-mix(in oklab, var(--rust) 40%, var(--border));
+}
+
+.account-tab-panel,
+.tab-fade-in {
+  animation: tabFadeSlide 380ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes tabFadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes statCardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Skeleton Loading Shimmer */
+@keyframes skeletonShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton,
+.section-loading {
+  background: linear-gradient(
+    90deg,
+    var(--paper-deep) 0%,
+    color-mix(in oklab, var(--paper-deep) 70%, white 30%) 50%,
+    var(--paper-deep) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.8s infinite linear;
+  border-radius: 4px;
+}
+
+/* Back to top floating button */
+.back-to-top-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 40;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--card);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 16px oklch(0.12 0.02 45 / 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(16px) scale(0.9);
+  pointer-events: none;
+  transition: opacity 300ms cubic-bezier(0.2, 0.7, 0.2, 1),
+              transform 300ms cubic-bezier(0.2, 0.7, 0.2, 1),
+              background 200ms ease,
+              border-color 200ms ease,
+              color 200ms ease,
+              box-shadow 200ms ease;
+}
+
+.back-to-top-btn.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.back-to-top-btn:hover {
+  background: var(--rust);
+  color: var(--primary-foreground);
+  border-color: var(--rust);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 24px oklch(0.55 0.151 38 / 0.35);
+}
+
+.back-to-top-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Blur to clear image loading */
+.destination-photo img,
+.package-photo img,
+.experience-card img,
+.roam-place-card img,
+.hospitality-card img {
+  filter: blur(0px);
+  transition: filter 600ms cubic-bezier(.2,.7,.2,1),
+              transform 750ms cubic-bezier(.2,.7,.2,1);
+}
+
+/* Button micro-interactions */
+.header-plan,
+.dialog-submit,
+.package-book,
+.closing-button,
+.search-submit {
+  transition: transform 250ms cubic-bezier(.2,.7,.2,1),
+              box-shadow 250ms cubic-bezier(.2,.7,.2,1),
+              background 200ms ease,
+              color 200ms ease;
+}
+
+.header-plan:hover,
+.dialog-submit:hover,
+.package-book:hover,
+.closing-button:hover,
+.search-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px color-mix(in oklab, var(--rust) 35%, transparent);
+}
+
+.header-plan:active,
+.dialog-submit:active,
+.package-book:active,
+.closing-button:active,
+.search-submit:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Slideshow timer dot progress line */
+.stories-dot {
+  position: relative;
+  overflow: hidden;
+}
+
+.stories-dot.is-active::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: var(--primary-foreground);
+  animation: dotTimer 4.2s linear infinite;
+  border-radius: 2px;
+}
+
+@keyframes dotTimer {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
 .admin-delete-btn svg {
   width: 14px;
   height: 14px;

@@ -27,6 +27,7 @@ import {
 import Button from "../components/ui/Button";
 import Input from "../components/ui/Input";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "../components/ui/Dialog";
+import AnimatedNumber from "../components/ui/AnimatedNumber";
 import { api } from "../api";
 import { useAuth } from "../context/AuthContext";
 import { formatDate, formatPrice } from "../utils/format";
@@ -382,7 +383,7 @@ export default function Account() {
               <Luggage aria-hidden="true" />
             </div>
             <div className="stat-data">
-              <span className="stat-value">{stats.totalTrips}</span>
+              <span className="stat-value"><AnimatedNumber value={stats.totalTrips} /></span>
               <span className="stat-label">Total Journeys</span>
             </div>
           </div>
@@ -398,7 +399,7 @@ export default function Account() {
               <Clock aria-hidden="true" />
             </div>
             <div className="stat-data">
-              <span className="stat-value">{stats.upcoming}</span>
+              <span className="stat-value"><AnimatedNumber value={stats.upcoming} /></span>
               <span className="stat-label">Upcoming Trips</span>
             </div>
           </div>
@@ -414,7 +415,7 @@ export default function Account() {
               <Check aria-hidden="true" />
             </div>
             <div className="stat-data">
-              <span className="stat-value">{stats.completed}</span>
+              <span className="stat-value"><AnimatedNumber value={stats.completed} /></span>
               <span className="stat-label">Completed Trips</span>
             </div>
           </div>
@@ -424,7 +425,7 @@ export default function Account() {
               <Heart aria-hidden="true" />
             </div>
             <div className="stat-data">
-              <span className="stat-value">{stats.savedPlaces}</span>
+              <span className="stat-value"><AnimatedNumber value={stats.savedPlaces} /></span>
               <span className="stat-label">Saved Places</span>
             </div>
           </div>

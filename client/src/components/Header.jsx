@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import Button from "./ui/Button";
@@ -17,11 +17,21 @@ export default function Header({ onPlan }) {
   const { user } = useAuth();
   const { openLogin, openDashboard } = useModals();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const openAccount = () => (user ? openDashboard() : openLogin());
 
   return (
-    <header className="site-header">
+    <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
       <a href="#home" className="wordmark" aria-label="Elsewhere home">
         elsewhere<span>.</span>
       </a>

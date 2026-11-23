@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { ArrowRight, ArrowUpRight, Check, ChevronDown, Search, Star, X } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, ChevronDown, ChevronLeft, ChevronRight, Search, Star, X } from "lucide-react";
 import Button from "../components/ui/Button";
 import Input from "../components/ui/Input";
 import Header from "../components/Header";
@@ -11,12 +11,37 @@ import DestinationCard from "../components/DestinationCard";
 import PackageCard from "../components/PackageCard";
 import PlannerDialog from "../components/PlannerDialog";
 import BookingDialog from "../components/BookingDialog";
+import BackToTop from "../components/BackToTop";
 import { api } from "../api";
 import { useAuth } from "../context/AuthContext";
 import { useModals } from "../context/ModalContext";
 import { useCurrency } from "../context/CurrencyContext";
 import { experiences, experienceToCategory, features, packageCategories } from "../utils/constants";
 import usePageTitle from "../utils/usePageTitle";
+
+const REVIEWS = [
+  {
+    quote: "We came home feeling like we’d been let in on a little secret. Every day felt like ours — not like anyone else’s itinerary.",
+    author: "Amelia & James",
+    trip: "Amalfi Coast, September ’25",
+    rating: "5.0",
+    badge: "VERIFIED TRAVELERS",
+  },
+  {
+    quote: "Waking up in Kyoto to private garden tea rituals and wandering ancient bamboo groves without crowds was pure magic. Elsewhere planned every nuance to perfection.",
+    author: "Elena & Marcus",
+    trip: "Kyoto & Hakone, November ’25",
+    rating: "5.0",
+    badge: "VERIFIED TRAVELERS",
+  },
+  {
+    quote: "From starlit desert camps in Merzouga to hidden riads in Marrakech, this wasn’t just sight-seeing — it transformed how our family experiences the world together.",
+    author: "Sophia & Liam Chen",
+    trip: "Morocco Odyssey, January ’26",
+    rating: "5.0",
+    badge: "VERIFIED TRAVELERS",
+  },
+];
 
 export default function Home() {
   usePageTitle("Elsewhere — Travel, thoughtfully made");
@@ -49,6 +74,30 @@ export default function Home() {
   const [plannerOpen, setPlannerOpen] = useState(false);
   const [bookingPackage, setBookingPackage] = useState(null);
   const [notice, setNotice] = useState("");
+
+  // ----- postcards / reviews slideshow -----
+  const [currentReview, setCurrentReview] = useState(0);
+  const [slideTimerKey, setSlideTimerKey] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentReview((prev) => (prev + 1) % REVIEWS.length);
+    }, 4200);
+    return () => clearInterval(timer);
+  }, [slideTimerKey]);
+
+  const handleNextReview = () => {
+    setCurrentReview((prev) => (prev + 1) % REVIEWS.length);
+    setSlideTimerKey((k) => k + 1);
+  };
+  const handlePrevReview = () => {
+    setCurrentReview((prev) => (prev - 1 + REVIEWS.length) % REVIEWS.length);
+    setSlideTimerKey((k) => k + 1);
+  };
+  const handleSelectReview = (idx) => {
+    setCurrentReview(idx);
+    setSlideTimerKey((k) => k + 1);
+  };
 
   // Load destinations
   useEffect(() => {
@@ -344,14 +393,82 @@ export default function Home() {
             <h2>Good trips<br />stay <em>with you.</em></h2>
             <a href="#destinations" className="text-link">Find your own story <ArrowUpRight aria-hidden="true" /></a>
           </div>
-          <article className="quote-block">
-            <span className="quote-mark">“</span>
-            <blockquote>We came home feeling like we’d been let in on a little secret. Every day felt like ours — not like anyone else’s itinerary.</blockquote>
-            <div className="quote-footer">
-              <div><strong>Amelia & James</strong><span>Amalfi Coast, September ’25</span></div>
-              <div className="rating"><span><Star fill="currentColor" aria-hidden="true" /> 5.0</span><span>VERIFIED TRAVELERS</span></div>
+
+          <div
+            className="stories-carousel-wrapper"
+            onMouseEnter={() => setIsReviewsPaused(true)}
+            onMouseLeave={() => setIsReviewsPaused(false)}
+            aria-roledescription="carousel"
+            aria-label="Traveler reviews slideshow"
+          >
+            <div className="stories-slides-viewport">
+              <div
+                className="stories-slides-track"
+                style={{ transform: `translateX(-${currentReview * 100}%)` }}
+              >
+                {REVIEWS.map((rev, index) => (
+                  <article
+                    className="quote-block stories-slide"
+                    key={index}
+                    aria-hidden={currentReview !== index}
+                  >
+                    <span className="quote-mark">“</span>
+                    <blockquote>{rev.quote}</blockquote>
+                    <div className="quote-footer">
+                      <div>
+                        <strong>{rev.author}</strong>
+                        <span>{rev.trip}</span>
+                      </div>
+                      <div className="rating">
+                        <span>
+                          <Star fill="currentColor" aria-hidden="true" /> {rev.rating}
+                        </span>
+                        <span>{rev.badge}</span>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
             </div>
-          </article>
+
+            <div className="stories-controls">
+              <div className="stories-dots" role="tablist" aria-label="Review pagination">
+                {REVIEWS.map((_, index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    role="tab"
+                    aria-selected={currentReview === index}
+                    className={`stories-dot ${currentReview === index ? "is-active" : ""}`}
+                    onClick={() => handleSelectReview(index)}
+                    aria-label={`Go to slide ${index + 1} of ${REVIEWS.length}`}
+                  />
+                ))}
+              </div>
+
+              <div className="stories-arrows">
+                <button
+                  type="button"
+                  className="stories-arrow-btn"
+                  onClick={handlePrevReview}
+                  aria-label="Previous review"
+                >
+                  <ChevronLeft aria-hidden="true" />
+                </button>
+                <span className="stories-counter">
+                  {String(currentReview + 1).padStart(2, "0")} / {String(REVIEWS.length).padStart(2, "0")}
+                </span>
+                <button
+                  type="button"
+                  className="stories-arrow-btn"
+                  onClick={handleNextReview}
+                  aria-label="Next review"
+                >
+                  <ChevronRight aria-hidden="true" />
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -384,6 +501,7 @@ export default function Home() {
         defaultTravelers={travelers}
         showPreview
       />
+      <BackToTop />
     </main>
   );
 }

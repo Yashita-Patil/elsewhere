@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ArrowRight, BarChart3, RefreshCw, TrendingUp } from "lucide-react";
 import Button from "../ui/Button";
+import AnimatedNumber from "../ui/AnimatedNumber";
 import { api } from "../../api";
 import { formatPrice } from "../../utils/format";
 
@@ -88,21 +89,21 @@ export default function AdminAnalytics({ onNavigateToBookings }) {
       <div className="analytics-kpi-grid">
         <div className="analytics-kpi-card">
           <span className="kpi-eyebrow">Total Volume</span>
-          <div className="kpi-value">{totalBookings.toLocaleString()}</div>
+          <div className="kpi-value"><AnimatedNumber value={totalBookings} /></div>
           <span className="kpi-label">Total Reservations</span>
           <p className="kpi-detail">All-time traveler enquiries and bookings</p>
         </div>
 
         <div className="analytics-kpi-card is-highlight">
           <span className="kpi-eyebrow">Net Realized</span>
-          <div className="kpi-value">{formatPrice(totalRevenue)}</div>
+          <div className="kpi-value"><AnimatedNumber value={totalRevenue} prefix="$" /></div>
           <span className="kpi-label">Total Revenue</span>
           <p className="kpi-detail">Excludes cancelled & unpaid reservations</p>
         </div>
 
         <div className="analytics-kpi-card">
           <span className="kpi-eyebrow">Pipeline</span>
-          <div className="kpi-value">{activeReservations.toLocaleString()}</div>
+          <div className="kpi-value"><AnimatedNumber value={activeReservations} /></div>
           <span className="kpi-label">Active Journeys</span>
           <p className="kpi-detail">
             {statusCounts.Upcoming || 0} upcoming · {statusCounts.Confirmed || 0} confirmed

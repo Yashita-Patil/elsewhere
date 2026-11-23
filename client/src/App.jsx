@@ -30,24 +30,26 @@ export default function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <ModalProvider>
-          <ScrollToHash />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/destinations/:slug" element={<DestinationDetail />} />
-            <Route path="/packages/:id" element={<PackageDetail />} />
-            <Route path="/account" element={<Account />} />
-            <Route path="/admin" element={<Admin initialTab="analytics" />} />
-            <Route path="/admin/analytics" element={<Admin initialTab="analytics" />} />
-            <Route path="/admin/bookings" element={<Admin initialTab="bookings" />} />
-            <Route path="/admin/destinations" element={<Admin initialTab="destinations" />} />
-            <Route path="/admin/journeys" element={<Admin initialTab="packages" />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          {/* These two popups are available on every page */}
-          <LoginDialog />
-          <DashboardDialog />
-        </ModalProvider>
+        <CurrencyProvider>
+          <ModalProvider>
+            <ScrollToHash />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/destinations/:slug" element={<DestinationDetail />} />
+              <Route path="/packages/:id" element={<PackageDetail />} />
+              <Route path="/account" element={<Account />} />
+              <Route path="/admin" element={<Admin initialTab="analytics" />} />
+              <Route path="/admin/analytics" element={<Admin initialTab="analytics" />} />
+              <Route path="/admin/bookings" element={<Admin initialTab="bookings" />} />
+              <Route path="/admin/destinations" element={<Admin initialTab="destinations" />} />
+              <Route path="/admin/journeys" element={<Admin initialTab="packages" />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+            {/* These two popups are available on every page */}
+            <LoginDialog />
+            <DashboardDialog />
+          </ModalProvider>
+        </CurrencyProvider>
       </AuthProvider>
     </BrowserRouter>
   );

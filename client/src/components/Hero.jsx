@@ -11,6 +11,7 @@ export default function Hero({ destinations, searchText, setSearchText, dateFrom
 
   return (
     <section className="hero" id="home" aria-labelledby="hero-title">
+      <div className="hero-bg" aria-hidden="true" />
       <div className="hero-shade" />
       <div className="hero-content page-wrap">
         <p className="eyebrow hero-eyebrow"><span className="eyebrow-line" />For the love of going</p>
