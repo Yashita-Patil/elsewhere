@@ -37,12 +37,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/reviews", reviewRoutes);
 app.use("/api", notFound); // any other /api/... URL
 
-// ----- Production: serve the built React app from this same server -----
-if (process.env.NODE_ENV === "production") {
-  const clientBuild = path.join(__dirname, "../client/dist");
-  app.use(express.static(clientBuild));
-  app.use((req, res) => res.sendFile(path.join(clientBuild, "index.html"))); // React Router handles the URL
-}
+// ----- Production: serve the built React app from this same server ----
 
 app.use(errorHandler);
 
